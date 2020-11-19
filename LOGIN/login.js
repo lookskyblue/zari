@@ -1,6 +1,7 @@
 /*
     HTML form 에서 로그인 버튼 클릭 시 입력한 id값을 콘솔에 출력함.
     실제 구현은 입력 값들을 Firebase로 넘겨줄 것. 
+    입력값 양식 검사는 어디서 언제 하는건가..?
 */
 
 const form = document.querySelector(".js-form"),
