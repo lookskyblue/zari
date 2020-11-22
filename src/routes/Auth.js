@@ -34,7 +34,7 @@ const Auth = () => {
       }catch(error){
         setError(error.message);
       }
-      
+
     };
     const toggleAccount = () => setNewAccount((prev) => !prev);
 

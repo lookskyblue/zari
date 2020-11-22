@@ -4,6 +4,7 @@ import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
+import ShowStoreList from "../routes/ShowStoreList"
 
 const AppRouter  = ({isLoggedIn}) => {
   return (
@@ -13,12 +14,19 @@ const AppRouter  = ({isLoggedIn}) => {
       <Switch>
         {isLoggedIn ? (
           <>
+          
             <Route exact path="/">
               <Home />
             </Route>
+
             <Route exact path="/profile">
               <Profile />
             </Route>
+
+            <Route exact path="/ShowStoreList">
+              <ShowStoreList />
+            </Route>
+
           </>
         ) : (
           <Route exact path="/">

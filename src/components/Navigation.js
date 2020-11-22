@@ -7,8 +7,13 @@ const Navigation = () => <nav>
         <li>
             <Link to="/">Home</Link>
         </li>
+
         <li>
             <Link to="/profile">My profile</Link>
+        </li>
+
+        <li>
+            <Link to="/ShowStoreList">매장 목록 보기</Link>
         </li>
     </ul>
 
