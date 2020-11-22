@@ -6,6 +6,7 @@ import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
 import ShowStoreList from "../routes/ShowStoreList"
 
+
 const AppRouter  = ({isLoggedIn}) => {
   return (
     <Router>
@@ -26,6 +27,8 @@ const AppRouter  = ({isLoggedIn}) => {
             <Route exact path="/ShowStoreList">
               <ShowStoreList />
             </Route>
+
+           
 
           </>
         ) : (

@@ -7,6 +7,8 @@ const Home = () =>{
     
     const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
+    const [storeIntro, setStoreIntro] = useState("");
+
     const [storeCollection, setStoreCollection] = useState([]);
 
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
@@ -40,17 +42,26 @@ const Home = () =>{
         dbService.collection("storeinfo").add({
             storeName,
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
+            storeIntro,
         });
         setStoreName("");
+        setStoreIntro("");
     };
-    const onChange = (event) =>{
+    const onChange1 = (event) =>{
         const { target:{value}} = event;
         setStoreName(value);
     }
+    const onChange2 = (event) =>{
+        const { target:{value}} = event;
+        setStoreIntro(value);
+    }
     return(<div>
         <form on onSubmit={onSubmit}>
-            <input value={storeName} onChange={onChange} type="text" placeholder="매장이름" maxLength={20}/>
-            
+            <input value={storeName} onChange={onChange1} type="text" placeholder="매장이름" maxLength={20}/>
+        </form>
+
+        <form on onSubmit={onSubmit}>
+            <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장설명" maxLength={200}/>
             <input type="submit" value="등록" />
         </form>
     </div>
