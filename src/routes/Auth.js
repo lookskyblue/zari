@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(false);  //로그인부터시작
     const [error,setError] = useState("");
     const onChange = (event) => {
       const {
@@ -60,10 +60,10 @@ const Auth = () => {
           <input type="submit" value={newAccount ? "Create Account":"Sign In"} />
           {error}
         </form>
-    <span onClick={toggleAccount}>{newAccount ? "Sign In":"Create Account"}</span>
+    <button onClick={toggleAccount}>{newAccount ? "Sign In":"Create Account"}</button>  
         <div>
-          <button>Continue with Google</button>
-          <button>Continue with Github</button>
+          
+          
         </div>
       </div>
     );
