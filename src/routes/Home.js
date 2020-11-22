@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 const Home = () =>{
     
     const [location, setLocation] = useState();
-    const [sname, setSname] = useState("");
+    const [storeName, setStoreName] = useState("");
     if (navigator.geolocation) { // GPS를 지원하면
         navigator.geolocation.getCurrentPosition(pos=>{
             setLocation(pos.coords);
@@ -26,18 +26,18 @@ const Home = () =>{
     const onSubmit = (event) => {
         event.preventDefault();
         dbService.collection("storeinfo").add({
-            sname,
+            storeName,
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
         });
-        setSname("");
+        setStoreName("");
     };
     const onChange = (event) =>{
         const { target:{value}} = event;
-        setSname(value);
+        setStoreName(value);
     }
     return(<div>
         <form on onSubmit={onSubmit}>
-            <input value={sname} onChange={onChange} type="text" placeholder="매장이름" maxLength={20}/>
+            <input value={storeName} onChange={onChange} type="text" placeholder="매장이름" maxLength={20}/>
             
             <input type="submit" value="등록" />
         </form>
