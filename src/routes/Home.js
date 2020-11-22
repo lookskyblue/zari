@@ -46,20 +46,5 @@ const Home = () =>{
 
 
 };
-function getLocation() {
-    if (navigator.geolocation) { // GPS를 지원하면
-      navigator.geolocation.getCurrentPosition(function(position) {
-        //alert(position.coords.latitude + ' ' + position.coords.longitude);
-      }, function(error) {
-        console.error(error);
-      }, {
-        enableHighAccuracy: false,
-        maximumAge: 0,
-        timeout: Infinity
-      });
-    } else {
-      alert('위치정보 불러오기 실패');
-    }
-  }
-  getLocation();
+
 export default Home;
