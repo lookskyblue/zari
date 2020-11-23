@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import { authService } from "fbase";
 
 const ShowStoreList = () => {
     const [storeList, setStoreList] = useState([]);
 
-    const getStoreList = async () => { // 매장 컬렉션 가져오기
-        const dbStoreInfo = await dbService.collection("storeinfo").get();
-        dbStoreInfo.forEach((document) => {
-            const storeListObject = { // 객체임
-                ...document.data(),
-                id: document.id,
-            };
-            setStoreList((prev) => [storeListObject, ...prev]);
-        });
-    };
-
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
-        getStoreList();
+        
+        dbService.collection("storeinfo").onSnapshot(snapshot => {
+            const storeArray = snapshot.docs.map(doc => ({
+                id:doc.id, 
+                ...doc.data(),
+            }));
+            setStoreList(storeArray);
+        });
     }, []);
-
-    //console.log(storeList);
+    
+    
+    
     return(
+        
         <div>
             {storeList.map((obj) => (
                 <div key={obj.id}>

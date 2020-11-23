@@ -4,19 +4,21 @@ import firebase from "firebase/app";
 import ShowStoreList from "./ShowStoreList";
 import { useHistory } from "react-router-dom";
 
-const Home = () =>{
+const Home = ({userObj}) =>{
     
     const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
-    const storeOnwer = authService.currentUser.email;
+    
     const [storeCollection, setStoreCollection] = useState([]);
     const history = useHistory();
+    
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
-        const dbStoreInfo = await dbService.collection("storeinfo").get();
+        const dbStoreInfo = await dbService.collection("storeinfo").where("storeOnwer","==",authService.currentUser.email).get();
         dbStoreInfo.forEach((document) => console.log(document.data()));
+        
     };
-
+    
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
         getStoreCollection();
     }, []);
@@ -39,15 +41,16 @@ const Home = () =>{
         alert('위치정보 불러오기 실패');
       }
       //위치정보 불러오기
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
        
         event.preventDefault();
-        dbService.collection("storeinfo").add({
+        await dbService.collection("storeinfo").add({
             storeName,
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
             storeIntro,
-            storeOnwer,
+            storeOnwer: userObj.email,
         });
+        
         setStoreName("");
         setStoreIntro("");
         history.push("/");  //showlist로 리다이렉트
