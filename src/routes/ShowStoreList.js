@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
 import { authService } from "fbase";
+import StoreInfo from "components/StoreInfo";
+import userEvent from "@testing-library/user-event";
 
-const ShowStoreList = () => {
+const ShowStoreList = ({userObj}) => {
     const [storeList, setStoreList] = useState([]);
 
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
@@ -22,12 +24,7 @@ const ShowStoreList = () => {
         
         <div>
             {storeList.map((obj) => (
-                <div key={obj.id}>
-                    <h3>
-                        매장이름: {obj.storeName}
-                    </h3>
-                    <h4>매장정보: {obj.storeIntro}</h4>
-                </div>
+                <StoreInfo key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email}/>
             ))}
         </div>
     );//여기서 css수정
