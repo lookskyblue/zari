@@ -5,6 +5,7 @@ import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
 import ShowStoreList from "../routes/ShowStoreList"
+import SimpleMap from "../components/googlemap"
 
 const AppRouter  = ({isLoggedIn,userObj}) => {
   return (
@@ -18,8 +19,8 @@ const AppRouter  = ({isLoggedIn,userObj}) => {
             <Route exact path="/">
               <ShowStoreList userObj={userObj} />
             </Route>
-
-            <Route exact path="/profile">
+            
+            <Route exact path="/Profile">
               <Profile />
             </Route>
 

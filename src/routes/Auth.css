@@ -1,10 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+
 body{
     background-color: #F8F8FF;
     color: black;
     margin: 10px;
     font-family: Arial;
     height: 100%;
+
+    font-family: 'Nanum Gothic', sans-serif,arial;
+   
 }
+
+#root>div>div{
+    padding: 20px 0;
+    border-bottom : solid 1px lightgray;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#root>div{
+    margin: 10px;
+   
+}
+#root > div > div > *
+{
+width : 100%;
+margin: 5px 0 ;
+text-align: center;
+}
+
+
+*{
+margin : 0;
+padding :0;
+list-style : none;
+text-decoration : none; 
+}
+
 
 .loginForm{ 
     display: flex;
@@ -34,7 +70,7 @@ form > input {
 
 .option button {
     margin: 50px 5px;
-    
+    padding: 5px 0;
 }
 
 .ZARI {
@@ -45,3 +81,9 @@ form > input {
     font-size: 70px;
     color: #4fc3f7;
 }
+
+footer{
+    display: flex;
+    justify-content: center;
+}
+

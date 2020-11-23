@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import GoogleApiWrapper from "./googlemap";
 
 const StoreInfo = ({storeObj,isOwner})=>(
     <div >
@@ -13,6 +14,8 @@ const StoreInfo = ({storeObj,isOwner})=>(
                     </>
                 )}
     </div>
+    
+        
     
 )
 

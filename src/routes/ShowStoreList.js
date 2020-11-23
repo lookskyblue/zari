@@ -3,6 +3,7 @@ import { dbService } from "fbase";
 import { authService } from "fbase";
 import StoreInfo from "components/StoreInfo";
 import userEvent from "@testing-library/user-event";
+import SimpleMap from "../components/googlemap"
 
 const ShowStoreList = ({userObj}) => {
     const [storeList, setStoreList] = useState([]);
@@ -23,6 +24,7 @@ const ShowStoreList = ({userObj}) => {
     return(
         
         <div>
+            <SimpleMap />
             {storeList.map((obj) => (
                 <StoreInfo key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email}/>
             ))}

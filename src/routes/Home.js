@@ -11,6 +11,7 @@ const Home = ({userObj}) =>{
     const [storeIntro, setStoreIntro] = useState("");
     
     const [storeCollection, setStoreCollection] = useState([]);
+    
     const history = useHistory();
     
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
