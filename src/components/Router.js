@@ -15,16 +15,16 @@ const AppRouter  = ({isLoggedIn}) => {
         {isLoggedIn ? (
           <>
           
-            <Route exact path="/">
-              <Home />
+            <Route exact path="/ShowStoreList">
+              <ShowStoreList />
             </Route>
 
             <Route exact path="/profile">
               <Profile />
             </Route>
 
-            <Route exact path="/ShowStoreList">
-              <ShowStoreList />
+            <Route exact path="/">
+              <Home />
             </Route>
 
           </>
