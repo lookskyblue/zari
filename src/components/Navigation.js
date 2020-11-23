@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Navigation = () => <nav>
     <ul>
         <li>
-            <Link to="/">매장등록</Link>
+            <Link to="/Home">매장등록</Link>
         </li>
 
         <li>
@@ -13,7 +13,7 @@ const Navigation = () => <nav>
         </li>
 
         <li>
-            <Link to="/ShowStoreList">매장 목록 보기</Link>
+            <Link to="/">매장 목록 보기</Link>
         </li>
     </ul>
 
