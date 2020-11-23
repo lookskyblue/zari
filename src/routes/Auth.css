@@ -1,0 +1,47 @@
+body{
+    background-color: #F8F8FF;
+    color: black;
+    margin: 10px;
+    font-family: Arial;
+    height: 100%;
+}
+
+.loginForm{ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    width: 350px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form > input {
+    margin: 5px 0px;
+    height: 40px;
+}
+
+.option {
+    display: flex;
+    width: 100%;
+    margin: 5px;
+    justify-content: center;
+}
+
+.option button {
+    margin: 50px 5px;
+    
+}
+
+.ZARI {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 100px 0px;
+    font-size: 70px;
+    color: #4fc3f7;
+}
