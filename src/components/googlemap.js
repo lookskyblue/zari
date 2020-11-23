@@ -6,11 +6,12 @@ import { Map, GoogleApiWrapper,InfoWindow,Marker } from "google-maps-react";
 class MapAPI extends Component {
   render() {
     const mapStyles = {
-      width: '50%',
-      height: '50%'
+      width: '100%',
+      height: '100%'
     }
+    
     return (
-      <div className='MapAPI' style={{ height: '50vh', width: '' }} >
+      <div className='MapAPI' style={{ height: '75vh', width: '75vh',}} >
         <Map
           google={this.props.google}
           zoom={15}
@@ -27,6 +28,7 @@ class MapAPI extends Component {
         </Map>
       </div>
     );
+   
   }
 }
  
@@ -34,10 +36,6 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyBo7P2RGGtra6b7xc61eqheHoeJrDfbfq4",
 })(MapAPI);
  
-
-
-
-
 /*
 import React, { Component } from 'react';
 import GoogleMapReact from "google-map-react";

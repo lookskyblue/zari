@@ -6,6 +6,7 @@ import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
 import ShowStoreList from "../routes/ShowStoreList"
 import SimpleMap from "../components/googlemap"
+import Review from "../routes/Review"
 
 const AppRouter  = ({isLoggedIn,userObj}) => {
   return (
@@ -24,9 +25,12 @@ const AppRouter  = ({isLoggedIn,userObj}) => {
               <Profile />
             </Route>
 
-            <Route exact path="/home">
+            <Route exact path="/Home">
               <Home userObj={userObj} />
             </Route>
+
+            <Route exact path="/review" component={Review} />
+            
             <Navigation/>
           </>
           

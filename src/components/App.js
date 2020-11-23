@@ -13,6 +13,7 @@ function App() {
       if(user){
         setIsLoggedIn(true);
         setUserObj(user); //현재사용자
+        
       }else{
         setIsLoggedIn(false);
       }

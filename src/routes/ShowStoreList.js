@@ -19,12 +19,11 @@ const ShowStoreList = ({userObj}) => {
         });
     }, []);
     
-    
-    
     return(
         
-        <div>
+        <div >
             <SimpleMap />
+            
             {storeList.map((obj) => (
                 <StoreInfo key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email}/>
             ))}

@@ -33,6 +33,7 @@ margin: 5px 0 ;
 text-align: center;
 }
 
+#root > div > div > div.MapAPI > div {position:relative !important;}
 
 *{
 margin : 0;
@@ -86,4 +87,3 @@ footer{
     display: flex;
     justify-content: center;
 }
-

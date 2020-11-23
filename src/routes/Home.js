@@ -50,6 +50,7 @@ const Home = ({userObj}) =>{
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
             storeIntro,
             storeOnwer: userObj.email,
+            UID: userObj.uid // 사용자 유니크 id
         });
         
         setStoreName("");
