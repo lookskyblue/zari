@@ -50,7 +50,7 @@ const Home = () =>{
         });
         setStoreName("");
         setStoreIntro("");
-        history.push("/");
+        history.push("/");  //showlist로 리다이렉트
     };
     const onChange1 = (event) =>{
         const { target:{value}} = event;

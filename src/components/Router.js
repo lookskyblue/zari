@@ -33,8 +33,9 @@ const AppRouter  = ({isLoggedIn}) => {
             <Auth />
           </Route>
         )}
+        <Navigation/>
       </Switch>
-      <Navigation/>
+      
     </Router>
   );
 };
