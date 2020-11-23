@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
+*{
+    margin : 0;
+    padding :0;
+    list-style : none;
+    text-decoration : none; 
+}
 
 body{
     background-color: #F8F8FF;
@@ -7,15 +13,12 @@ body{
     margin: 10px;
     font-family: Arial;
     height: 100%;
-
     font-family: 'Nanum Gothic', sans-serif,arial;
-   
 }
 
-#root>div>div{
+.storeInfo {
     padding: 20px 0;
     border-bottom : solid 1px lightgray;
-
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -23,24 +26,16 @@ body{
 }
 
 #root>div{
+    
     margin: 10px;
-   
 }
-#root > div > div > *
+
+.storeInfo__name, .storeInfo__intro
 {
-width : 100%;
-margin: 5px 0 ;
-text-align: center;
+    width : 100%;
+    margin: 5px 0 ;
+    text-align: center;
 }
-
-
-*{
-margin : 0;
-padding :0;
-list-style : none;
-text-decoration : none; 
-}
-
 
 .loginForm{ 
     display: flex;
@@ -87,3 +82,16 @@ footer{
     justify-content: center;
 }
 
+.map {
+    display: flex;
+    justify-content: center;
+}
+
+.storeInfo a {
+    z-index: 0;
+    width: 100%;
+}
+
+.storeInfo a:hover{
+    cursor: pointer;
+}
