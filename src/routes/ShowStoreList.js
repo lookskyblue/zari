@@ -24,13 +24,14 @@ const ShowStoreList = () => {
         <div>
             {storeList.map((obj) => (
                 <div key={obj.id}>
-                    <h4>
-                        가게이름: {obj.storeName}  
-                    </h4> 
+                    <h3>
+                        매장이름: {obj.storeName}
+                    </h3>
+                    <h4>매장정보: {obj.storeIntro}</h4>
                 </div>
             ))}
         </div>
-    );
+    );//여기서 css수정
 };
 
 export default ShowStoreList;

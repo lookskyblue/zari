@@ -9,13 +9,13 @@ import ShowStoreList from "../routes/ShowStoreList"
 const AppRouter  = ({isLoggedIn}) => {
   return (
     <Router>
-      {isLoggedIn &&<Navigation/>}
+      {isLoggedIn }
 
       <Switch>
         {isLoggedIn ? (
           <>
           
-            <Route exact path="/ShowStoreList">
+            <Route exact path="/">
               <ShowStoreList />
             </Route>
 
@@ -23,7 +23,7 @@ const AppRouter  = ({isLoggedIn}) => {
               <Profile />
             </Route>
 
-            <Route exact path="/">
+            <Route exact path="/home">
               <Home />
             </Route>
 
@@ -34,6 +34,7 @@ const AppRouter  = ({isLoggedIn}) => {
           </Route>
         )}
       </Switch>
+      <Navigation/>
     </Router>
   );
 };

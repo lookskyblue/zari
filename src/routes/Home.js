@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import ShowStoreList from "./ShowStoreList";
@@ -8,7 +8,7 @@ const Home = () =>{
     const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
-
+    const storeOnwer = authService.currentUser.email;
     const [storeCollection, setStoreCollection] = useState([]);
 
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
@@ -44,6 +44,7 @@ const Home = () =>{
             storeName,
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
             storeIntro,
+            storeOnwer,
         });
         setStoreName("");
         setStoreIntro("");
@@ -66,7 +67,7 @@ const Home = () =>{
             <input type="submit" value="등록" />
         </form>
     </div>
-    );
+    );//css수정필요
 
 };
 
