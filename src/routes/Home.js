@@ -2,6 +2,7 @@ import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import ShowStoreList from "./ShowStoreList";
+import { useHistory } from "react-router-dom";
 
 const Home = () =>{
     
@@ -10,7 +11,7 @@ const Home = () =>{
     const [storeIntro, setStoreIntro] = useState("");
     const storeOnwer = authService.currentUser.email;
     const [storeCollection, setStoreCollection] = useState([]);
-
+    const history = useHistory();
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
         const dbStoreInfo = await dbService.collection("storeinfo").get();
         dbStoreInfo.forEach((document) => console.log(document.data()));
@@ -39,6 +40,7 @@ const Home = () =>{
       }
       //위치정보 불러오기
     const onSubmit = (event) => {
+       
         event.preventDefault();
         dbService.collection("storeinfo").add({
             storeName,
@@ -48,6 +50,7 @@ const Home = () =>{
         });
         setStoreName("");
         setStoreIntro("");
+        history.push("/");
     };
     const onChange1 = (event) =>{
         const { target:{value}} = event;
