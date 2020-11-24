@@ -5,7 +5,9 @@ import logo from "../imgs/logo.png";
 const Navigation = () => 
 <nav className="nav__container">
     <div className="nav__logo">
+        <Link to="/">
         <img src={logo} title="ZARI" name="ZARI"/>
+        </Link>
     </div>
     <ul className="nav__menu">
         <li>

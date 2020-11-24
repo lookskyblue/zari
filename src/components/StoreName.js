@@ -33,7 +33,7 @@ const StoreName = ({storeObj,isOwner})=> {
                     storeObj,
                     isOwner}
                     }}>
-                    <button>선택</button>
+                    <button className="infoEdit">관리</button>
                     </Link>
                     </>
                 )}
