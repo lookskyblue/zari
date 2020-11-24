@@ -15,7 +15,7 @@ class MapAPI extends Component {
         <Map
           google={this.props.google}
           zoom={15}
-          initialCenter={{ lat: 37.5, lng: 127 }}
+          initialCenter={{ lat: 36.5, lng: 129 }}
           style={mapStyles}
         >
           <Marker name={"현재위치"}/>
