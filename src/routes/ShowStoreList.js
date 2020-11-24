@@ -5,7 +5,7 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import SimpleMap from "../components/googlemap"
 
-var test;
+var test;   // 매장 객체 배열
 
 const ShowStoreList = ({userObj}) => {
     const [storeList, setStoreList] = useState([]);

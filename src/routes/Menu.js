@@ -6,10 +6,10 @@
 import React, { useEffect, useState } from "react";
 import MenuAdd from "./MenuAdd";
 import { authService, dbService } from "fbase";
-import { test } from "./ShowStoreList";
 import MenuLoad from "./MenuLoad";
+import { SelectedStoreObj } from "../components/StoreName";
 
-const Menu = () => {
+const Menu = (storeObj) => {
     const [isLoading, setisLoading] = useState(false);
 
     const SpreadMenuAdd = () => {
@@ -29,18 +29,19 @@ const Menu = () => {
         });
     }, []);
 
-    const [temp, setTemp] = useState("");
+    const iidd = storeObj.location.state.storeObj;
 
     return (
         <div>
             <div>
             {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
-                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===test.id}/>
+                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===iidd}/>
                  ))}
             </div>
+            
             <button onClick={SpreadMenuAdd}>메뉴 추가</button>
             <div>
-                {isLoading ? <MenuAdd storeObj={test}/> : ""}
+                {isLoading ? <MenuAdd storeObj={iidd}/> : ""}
             </div>
         </div>
     );

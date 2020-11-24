@@ -17,6 +17,7 @@ class PosEdit extends React.Component {
     render() {
         const { location, history } = this.props;
         
+        
        // const { location, history } = this.props;
         // console.log(this.props);
         // console.log(location.state);
@@ -34,7 +35,7 @@ class PosEdit extends React.Component {
                         {
                             pathname:"/Menu",
                             state: {
-                                storeObj: location.state.storeObj
+                                storeObj: location.state.storeObj.id
                             }
                         }
                     }>

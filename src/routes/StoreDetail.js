@@ -7,9 +7,6 @@ import React, { useEffect, useState } from "react";
 import ReviewPage from "./ReviewPage";
 import {Link} from "react-router-dom";
 
-
-
-
 class StoreDetail extends React.Component { 
     state = {
         isLoading: false
@@ -18,9 +15,9 @@ class StoreDetail extends React.Component {
     SpreadReview = () => {  // 토글
         this.setState(current => ({isLoading: !current.isLoading}))
     };
+
     
     render() {
-
         const { isLoading } = this.state;
         const { location }  = this.props;
         const ownerId       = location.state.storeObj.id;
@@ -28,6 +25,7 @@ class StoreDetail extends React.Component {
         const storeIntro    = location.state.storeObj.storeIntro;
         const storeTime    = location.state.storeObj.Time;
         const isOwner       = location.state.isOwner;
+
         
         return ( // 가게 정보 필요한거 있으면 추가로 넣어줄 것
         <div> 

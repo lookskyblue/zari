@@ -12,7 +12,7 @@ const MenuAdd = ({storeObj}) => {
             Image: MenuImage,
             Name: MenuName,
             Price: MenuPrice,
-            StoreID: storeObj.id
+            StoreID: storeObj
         });
         setMenuImage("");
         setMenuName("");
@@ -38,9 +38,9 @@ const MenuAdd = ({storeObj}) => {
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input value={MenuImage} onChange={onChange1} type="text" placeholder="메뉴 이미지" maxLength={50} />
-                <input value={MenuName} onChange={onChange2} type="text" placeholder="메뉴 이름" maxLength={50} />
-                <input value={MenuPrice} onChange={onChange3} type="text" placeholder="메뉴 가격" maxLength={50} />
+                <input value={MenuImage} onChange={onChange1} type="text" placeholder="메뉴 이미지" maxLength={50} required />
+                <input value={MenuName} onChange={onChange2} type="text" placeholder="메뉴 이름" maxLength={50} required/>
+                <input value={MenuPrice} onChange={onChange3} type="text" placeholder="메뉴 가격" maxLength={50} required/>
                 <input type="submit" value="메뉴 추가" />
             </form>
         </div>
