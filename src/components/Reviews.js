@@ -1,29 +1,27 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 
-const Reviews = ({reviews,isStore})=> {
-    console.log(reviews)
+const Reviews = ({ reviews, isStore }) => {
+
     return (
-    <div>
-        <Link 
-            to={{
-                pathname: "/",
-                state: {
-                    reviews,
-                }
-            }}
-        >
-                
-            
+        <div>
+            <Link
+                to={{
+                    pathname: "/",
+                    state: {
+                        reviews,
+                    }
+                }}
+            >
                 {isStore && (
                     <h3>
-                    리뷰: {reviews.UserComment}
+                        리뷰: {reviews.UserComment}
                     </h3>
                 )}
 
             </Link>
-    </div>
+        </div>
     );
 
 }
