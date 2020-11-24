@@ -9,6 +9,7 @@ const Home = ({userObj}) =>{
     const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
+    const [storeTime, setStoreTime] = useState("");
     
     const [storeCollection, setStoreCollection] = useState([]);
     
@@ -16,7 +17,7 @@ const Home = ({userObj}) =>{
     
     const getStoreCollection = async () => { // 매장 컬렉션 가져오기
         const dbStoreInfo = await dbService.collection("storeinfo").where("storeOnwer","==",authService.currentUser.email).get();
-        dbStoreInfo.forEach((document) => console.log(document.data()));
+        //dbStoreInfo.forEach((document) => console.log(document.data()));
         
     };
     
@@ -43,18 +44,20 @@ const Home = ({userObj}) =>{
       }
       //위치정보 불러오기
     const onSubmit = async (event) => {
-       
+
         event.preventDefault();
         await dbService.collection("storeinfo").add({
             storeName,
             location: new firebase.firestore.GeoPoint(location.latitude,location.longitude), //위치
             storeIntro,
             storeOnwer: userObj.email,
-            UID: userObj.uid // 사용자 유니크 id
+            UID: userObj.uid, // 사용자 유니크 id
+            Time: storeTime
         });
         
         setStoreName("");
         setStoreIntro("");
+        setStoreTime("");
         history.push("/");  //showlist로 리다이렉트
     };
     const onChange1 = (event) =>{
@@ -65,13 +68,21 @@ const Home = ({userObj}) =>{
         const { target:{value}} = event;
         setStoreIntro(value);
     }
+    const onChange3 = (event) =>{
+        const { target:{value}} = event;
+        setStoreTime(value);
+    }
     return(<div>
         <form on onSubmit={onSubmit}>
-            <input value={storeName} onChange={onChange1} type="text" placeholder="매장이름" maxLength={20}/>
+            <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20}/>
         </form>
 
         <form on onSubmit={onSubmit}>
-            <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장설명" maxLength={200}/>
+            <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200}/>
+        </form>
+
+        <form on onSubmit={onSubmit}>
+            <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200}/>
             <input type="submit" value="등록" />
         </form>
     </div>

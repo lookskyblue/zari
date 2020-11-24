@@ -33,7 +33,12 @@ body{
     margin-top: 140px;
 }
 
-.storeInfo__name, .storeInfo__intro
+.storeInfo a {
+    display: flex;
+    justify-content: center;
+}
+
+.storeInfo__name
 {
     width : 100%;
     margin: 5px 0 ;
