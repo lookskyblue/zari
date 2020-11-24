@@ -3,9 +3,12 @@
     매장의 세부 정보를 볼 수 있는 페이지
     StoreName.js에서 storObj, isOwner 받아옴.
 */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReviewPage from "./ReviewPage";
 import {Link} from "react-router-dom";
+
+
+
 
 class StoreDetail extends React.Component { 
     state = {
@@ -17,6 +20,9 @@ class StoreDetail extends React.Component {
     };
     
     render() {
+        
+    
+
         const { isLoading } = this.state;
         const { location }  = this.props;
         const ownerId       = location.state.storeObj.id;

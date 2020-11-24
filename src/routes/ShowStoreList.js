@@ -24,7 +24,6 @@ const ShowStoreList = ({userObj}) => {
         
         <div >
             <SimpleMap />
-            
             {storeList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email}/>
             ))}
