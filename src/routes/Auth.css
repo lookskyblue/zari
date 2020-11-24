@@ -10,7 +10,6 @@
 body{
     background-color: #F8F8FF;
     color: black;
-    margin: 10px;
     font-family: Arial;
     height: 100%;
     font-family: 'Nanum Gothic', sans-serif,arial;
@@ -25,9 +24,13 @@ body{
     width: 100%;
 }
 
+#root > div > div:nth-child(1) {
+    margin-top:140px;
+}
+
 #root>div{
-    
     margin: 10px;
+    margin-top: 140px;
 }
 
 .storeInfo__name, .storeInfo__intro
@@ -80,18 +83,49 @@ form > input {
 footer{
     display: flex;
     justify-content: center;
-}
-
-.map {
-    display: flex;
-    justify-content: center;
+    padding-top: 55px;
 }
 
 .storeInfo a {
     z-index: 0;
     width: 100%;
+    color: #333;
 }
 
 .storeInfo a:hover{
     cursor: pointer;
+}
+
+.nav__container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.nav__logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #F8F8FF;
+}
+
+.nav__logo > img {
+    width: 230px;
+}
+
+.nav__menu {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    width: 100%;
+    background-color: #FFA07A;
+}
+
+.nav__menu a {
+    color:#333;
+    font-weight: bold;
 }

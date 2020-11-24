@@ -9,9 +9,9 @@ export default () => {
         history.push("/");
     }
     return(
-        <>
+        <div>
         <button onClick={onLogoutClick}>Log Out</button>
-        </>
+        </div>
         
     );
 };
