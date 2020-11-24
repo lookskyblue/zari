@@ -4,7 +4,7 @@
 */
 import React, { Component } from "react";
 import GoogleApiWrapper from "./googlemap";
-import Review from "../routes/StoreDetail";
+import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
@@ -27,10 +27,17 @@ const StoreName = ({storeObj,isOwner})=> {
             
                 {isOwner && (
                     <>
+                    <Link to={
+                    {pathname:"/Pos",
+                    state: {
+                    storeObj,
+                    isOwner}
+                    }}>
                     <button>선택</button>
+                    </Link>
                     </>
                 )}
-
+                
             </Link>
     </div>
     );

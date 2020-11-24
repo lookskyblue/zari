@@ -7,7 +7,8 @@ import Navigation from "./Navigation";
 import ShowStoreList from "../routes/ShowStoreList"
 import SimpleMap from "../components/googlemap"
 import StoreDetail from "../routes/StoreDetail"
-import ReviewPage from "../routes/ReviewPage"
+import Pos from "../routes/Pos"
+import PosEdit from "../routes/PosEdit"
 
 const AppRouter  = ({isLoggedIn,userObj}) => {
   return (
@@ -31,6 +32,9 @@ const AppRouter  = ({isLoggedIn,userObj}) => {
             </Route>
 
             <Route exact path="/storeDetail" component={StoreDetail} />
+            
+            <Route exact path= /*{'/${Review}'}*/"/Pos" component={Pos} />
+            <Route exact path= /*{'/${Review}'}*/"/PosEdit" component={PosEdit} />
             
             <Navigation/>
           </>
