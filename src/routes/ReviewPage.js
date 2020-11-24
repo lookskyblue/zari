@@ -38,16 +38,17 @@ const ReviewPage = ({storeName, ownerId }) => {
             const { target:{value}} = event;
             setMyComment(value);
         }
+        
 
         return(
             <div>
                 <h1>
                     리뷰 화면
                 </h1>
-               
+                    
                 <div> 
                 {reviewList.map((obj) => (
-                <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreOwnerId===ownerId}/>
+                <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreOwnerId===ownerId }/>
                  ))}
                 
                     <form onSubmit={onSubmit}>

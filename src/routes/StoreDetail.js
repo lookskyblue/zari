@@ -20,8 +20,6 @@ class StoreDetail extends React.Component {
     };
     
     render() {
-        
-    
 
         const { isLoading } = this.state;
         const { location }  = this.props;
@@ -30,11 +28,14 @@ class StoreDetail extends React.Component {
         const storeIntro    = location.state.storeObj.storeIntro;
         const storeTime    = location.state.storeObj.Time;
         const isOwner       = location.state.isOwner;
-        console.log(location.state.storeObj);
+        var xx = location.state.storeObj.id;
+        
+        localStorage.setItem("MyStore", "12");
+
         return ( // 가게 정보 필요한거 있으면 추가로 넣어줄 것
         <div> 
             <h1>매장의 정보를 보는 페이지. </h1>
-
+            {localStorage.setItem("MyStore", "12")}
             <ul>
                 <li> 
                     매장 이름: {storeName} 
@@ -62,3 +63,4 @@ class StoreDetail extends React.Component {
 }
 
 export default StoreDetail;
+export var xx;

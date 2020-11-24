@@ -5,9 +5,10 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import SimpleMap from "../components/googlemap"
 
-
+var test = 3;
 const ShowStoreList = ({userObj}) => {
     const [storeList, setStoreList] = useState([]);
+    test = storeList;
 
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
@@ -21,12 +22,14 @@ const ShowStoreList = ({userObj}) => {
     }, []);
 
 
-
+    let co = 0;
     return (
 
         <div>
             <SimpleMap />
-            {storeList.map((obj) => (
+            
+            {storeList.map((obj) => (co = co + 1,
+                console.log(co),
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email}/>
             ))}
         </div>
@@ -34,3 +37,4 @@ const ShowStoreList = ({userObj}) => {
 };
 
 export default ShowStoreList;
+export var test;

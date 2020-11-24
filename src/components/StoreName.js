@@ -8,8 +8,9 @@ import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
+
 const StoreName = ({storeObj,isOwner})=> {
-    
+
     return (
     <div className="storeInfo">
         <Link 
@@ -21,12 +22,13 @@ const StoreName = ({storeObj,isOwner})=> {
                 }
             }}
         >
+            </Link>
                 <h3>
                     매장이름: {storeObj.storeName}
                 </h3>
             
                 {isOwner && (
-                    <>
+                    
                     <Link to={
                     {pathname:"/Pos",
                     state: {
@@ -35,10 +37,8 @@ const StoreName = ({storeObj,isOwner})=> {
                     }}>
                     <button>선택</button>
                     </Link>
-                    </>
+                    
                 )}
-                
-            </Link>
     </div>
     );
 

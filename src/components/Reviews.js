@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 
 const Reviews = ({reviews,isStore})=> {
-    console.log(reviews)
+    console.log("@@@@@@@@@@@@")
     return (
     <div>
         <Link 
@@ -18,7 +18,7 @@ const Reviews = ({reviews,isStore})=> {
             
                 {isStore && (
                     <h3>
-                    리뷰: {reviews.UserComment}
+                    리뷰: {reviews.Name}
                     </h3>
                 )}
 
