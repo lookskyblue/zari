@@ -1,21 +1,35 @@
-
-import React, { Component } from "react";
+import React, { Component ,useState, useEffect } from "react";
 import { Map, GoogleApiWrapper,InfoWindow,Marker } from "google-maps-react";
+
+
 //import "./MapAPI.scss";
- 
+
+
+
+
+
+
 class MapAPI extends Component {
-  render() {
+  
+  
+    
+ 
+  render () {
+    
+    
     const mapStyles = {
       width: '100%',
       height: '100%'
     }
     
+   
+   
     return (
       <div className='MapAPI' style={{ height: '100vh', width: '100vh',}} >
         <Map
           google={this.props.google}
           zoom={15}
-          initialCenter={{ lat: 36.5, lng: 129 }}
+          initialCenter={this.props.initialCenter}
           style={mapStyles}
         >
           <Marker name={"현재위치"}/>
@@ -36,6 +50,7 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyBo7P2RGGtra6b7xc61eqheHoeJrDfbfq4",
 })(MapAPI);
  
+
 /*
 import React, { Component } from 'react';
 import GoogleMapReact from "google-map-react";

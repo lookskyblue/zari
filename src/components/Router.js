@@ -10,7 +10,7 @@ import StoreDetail from "../routes/StoreDetail"
 import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
 
-const AppRouter  = ({isLoggedIn,userObj}) => {
+const AppRouter  = ({isLoggedIn,userObj,location}) => {
   return (
     <Router>
       {isLoggedIn }
@@ -20,7 +20,7 @@ const AppRouter  = ({isLoggedIn,userObj}) => {
           <>
             <Navigation/>
             <Route exact path="/">
-              <ShowStoreList userObj={userObj} />
+              <ShowStoreList userObj={userObj} location={location} />
             </Route>
             
             <Route exact path="/Profile">

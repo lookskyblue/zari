@@ -22,7 +22,7 @@ class StoreDetail extends React.Component {
     render() {
         
     
-
+        
         const { isLoading } = this.state;
         const { location }  = this.props;
         const ownerId       = location.state.storeObj.id;
