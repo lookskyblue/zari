@@ -9,8 +9,11 @@ import SimpleMap from "../components/googlemap"
 import StoreDetail from "../routes/StoreDetail"
 import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
+import Menu from "../routes/Menu"
+
 
 const AppRouter  = ({isLoggedIn,userObj}) => {
+
   return (
     <Router>
       {isLoggedIn }
@@ -35,6 +38,7 @@ const AppRouter  = ({isLoggedIn,userObj}) => {
             
             <Route exact path= /*{'/${Review}'}*/"/Pos" component={Pos} />
             <Route exact path= /*{'/${Review}'}*/"/PosEdit" component={PosEdit} />
+            <Route exact path="/Menu" component={Menu} />
             
             <Navigation/>
           </>

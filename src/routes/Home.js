@@ -15,17 +15,6 @@ const Home = ({userObj}) =>{
     
     const history = useHistory();
     
-    const getStoreCollection = async () => { // 매장 컬렉션 가져오기
-        const dbStoreInfo = await dbService.collection("storeinfo").where("storeOnwer","==",authService.currentUser.email).get();
-        //dbStoreInfo.forEach((document) => console.log(document.data()));
-        
-    };
-    
-    useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
-        getStoreCollection();
-    }, []);
-
-
     if (navigator.geolocation) { // GPS를 지원하면
         navigator.geolocation.getCurrentPosition(pos=>{
             setLocation(pos.coords);

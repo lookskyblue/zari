@@ -31,7 +31,7 @@ const ReviewPage = ({storeName, ownerId }) => {
             setReviewList(reviewArray);
         });
         }, []);
-        console.log(reviewList);
+        
 
 
         const onChange = (event) => {
