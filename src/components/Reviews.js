@@ -16,14 +16,13 @@ const Reviews = ({ reviews, isStore }) => {
             >
                 {isStore && (
                     <h3>
-                        리뷰: {reviews.UserComment}
+                        {reviews.UserEmail}: {reviews.UserComment}
                     </h3>
                 )}
 
             </Link>
         </div>
     );
-
 }
 
 export default Reviews;
