@@ -8,11 +8,10 @@ import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
-var SelectedStoreObj;  // 내가 선택한 매장의 객체를 저장하는 변수
+
 const StoreName = ({storeObj,isOwner,isNear})=> {
 
-    SelectedStoreObj = storeObj;
-    console.log(isNear);
+    
     return (
         
         
@@ -59,4 +58,3 @@ const StoreName = ({storeObj,isOwner,isNear})=> {
 }
 
 export default StoreName;
-export var SelectedStoreObj;
