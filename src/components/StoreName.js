@@ -12,7 +12,6 @@ var SelectedStoreObj;  // 내가 선택한 매장의 객체를 저장하는 변�
 const StoreName = ({storeObj,isOwner,isNear})=> {
 
     SelectedStoreObj = storeObj;
-    console.log(isNear);
     return (
         
         
