@@ -31,6 +31,7 @@ const Menu = (storeObj) => {
 
     const iidd = storeObj.location.state.storeObj;
 
+    
     return (
         <div>
             <div>
@@ -45,7 +46,7 @@ const Menu = (storeObj) => {
             </div>
         </div>
     );
-
+    
 
 }
 
