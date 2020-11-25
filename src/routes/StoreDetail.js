@@ -66,8 +66,9 @@ class StoreDetail extends React.Component {
                         매장 영업시간 : {storeTime}
                     </li>
                 </ul>
-
-                <button onClick={this.SpreadReview} >리뷰보기</button>
+                <div className="storeDetail__Btn">
+                    <button onClick={this.SpreadReview} >리뷰</button>
+                </div>
                 <div>
                     {isLoading ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
                 </div>
