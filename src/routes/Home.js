@@ -64,15 +64,15 @@ const Home = ({ userObj }) => {
 
     return (<div>
         <form on onSubmit={onSubmit}>
-            <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20} />
+            <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20} required/>
         </form>
 
         <form on onSubmit={onSubmit}>
-            <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200} />
+            <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200} required/>
         </form>
 
         <form on onSubmit={onSubmit}>
-            <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200} />
+            <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200} required/>
             <input type="submit" value="등록" />
         </form>
     </div>

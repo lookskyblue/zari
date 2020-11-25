@@ -83,7 +83,8 @@ const StoreDetail = (storeObj, isNear) => {
                     매장 영업시간 : {storeTime}
                 </li>
             </ul>
-            <div>
+            <div className="storeDetail__menu">
+                <p>Menu</p>
                 {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
                     <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === ownerId} />
                 ))}
