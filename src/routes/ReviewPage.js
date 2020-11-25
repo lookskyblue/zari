@@ -38,10 +38,6 @@ const ReviewPage = ({ storeName, ownerId }) => {
 
     return (
         <div>
-            <h1>
-                리뷰 화면
-                </h1>
-
             <div>
                 {reviewList.map((obj) => (
                     <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreOwnerId === ownerId} />

@@ -11,7 +11,6 @@ import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
 import Menu from "../routes/Menu"
 
-
 const AppRouter  = ({isLoggedIn,userObj,location}) => {
   return (
     <Router>

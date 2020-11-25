@@ -74,11 +74,12 @@ form > input {
 
 .ZARI {
     display: flex;
-    width: 100%;
+    width: 300px;
     justify-content: center;
     margin: 100px 0px;
     font-size: 70px;
-    color: #4fc3f7;
+    color: #024b56;
+    text-shadow: 2px 3px 4px black;
 }
 
 footer{
@@ -134,4 +135,48 @@ footer{
 .nav__menu a {
     color:#333;
     font-weight: bold;
+}
+
+.storeDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.storeDetail > * {
+    padding: 20px;
+    font-size: 30px;
+}
+
+.storeDetail__Name {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.storeDetail__Btn {
+    display: flex;
+    justify-content: center;
+    padding: 20px
+}
+
+/* 버튼 기본 css */
+.storeDetail__Btn > button {
+    border:none;
+    height: 50px;
+    width: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #ffccbc;
+    color: black;
+}
+
+.storeDetail__Btn > button:focus{
+    outline:0;
+}
+
+.storeDetail__Btn > button:hover{
+    background-color:#ffddc1;
+    cursor:pointer;
+    box-shadow:0 0 4px #c97b63;
 }
