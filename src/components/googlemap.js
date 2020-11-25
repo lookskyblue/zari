@@ -2,6 +2,7 @@ import React, { Component ,useState, useEffect } from "react";
 import { Map, GoogleApiWrapper,InfoWindow,Marker } from "google-maps-react";
 
 
+
 //import "./MapAPI.scss";
 
 
@@ -10,8 +11,27 @@ import { Map, GoogleApiWrapper,InfoWindow,Marker } from "google-maps-react";
 
 
 class MapAPI extends Component {
-  
-  
+ 
+  state = {
+    showingInfoWindow : false , 
+    activeMarker : { } , 
+    selectedPlace : { } , 
+  };
+  onMarkerClick = (props, marker, e) =>
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true
+  });
+
+  onMapClicked = (props) => {
+  if (this.state.showingInfoWindow) {
+    this.setState({
+      showingInfoWindow: false,
+      activeMarker: null
+      })
+    }
+  };
     
  
   render () {
@@ -22,23 +42,38 @@ class MapAPI extends Component {
       height: '100%'
     }
     
-   
-   
+    
+    console.log(this.props)
     return (
+      
       <div className='MapAPI' style={{ height: '100vh', width: '100vh',}} >
         <Map
+          onClick={this.onMapClicked}
           google={this.props.google}
           zoom={15}
           initialCenter={this.props.initialCenter}
           style={mapStyles}
         >
-          <Marker name={"현재위치"}/>
-          <InfoWindow>
+
+          <Marker onClick={this.onMarkerClick} name={"현재위치"}/>
+          <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+          </InfoWindow>
+          
+          <Marker
+            onClick={this.onMarkerClick} name={"매장위치"}
+            title={'근처매장'}
+            name={'매장'}
+            position={{lat: 35.778519, lng: 128.405640}} >
+          <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
             <div>
               <h1>test
                 </h1>
             </div>
           </InfoWindow>
+          </Marker>
         </Map>
       </div>
     );

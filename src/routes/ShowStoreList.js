@@ -5,12 +5,13 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import MapAPI from "../components/googlemap"
 
+
 var test;   // 매장 객체 배열
 
 const ShowStoreList = ({userObj,location}) => {
     const [storeList, setStoreList] = useState([]);
     
-
+    
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
         dbService.collection("storeinfo").onSnapshot(snapshot => {

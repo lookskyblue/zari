@@ -9,10 +9,11 @@ function App() {
   const [userObj, setUserObj] = useState(null);
 
   const [location, setLocation] = useState();
-
+  
   if (navigator.geolocation) { // GPS를 지원하면
     navigator.geolocation.getCurrentPosition(pos=>{
         setLocation(pos.coords);
+        
     },
     error =>{
         console.error(error);
@@ -27,7 +28,7 @@ function App() {
     alert('위치정보 불러오기 실패');
   }
 
-
+  
   useEffect(() => {
     authService.onAuthStateChanged((user)=> {
       if(user){
