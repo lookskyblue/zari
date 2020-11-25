@@ -9,13 +9,19 @@ import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 var SelectedStoreObj;  // 내가 선택한 매장의 객체를 저장하는 변수
-const StoreName = ({storeObj,isOwner})=> {
+const StoreName = ({storeObj,isOwner,isNear})=> {
 
     SelectedStoreObj = storeObj;
-
+    console.log(isNear);
     return (
+        
+        
     <div className="storeInfo">
+        {isNear ===1 &&(
+            <>
+            <div>
         <Link 
+            
             to={{
                 pathname: "/storeDetail",
                 state: {
@@ -23,7 +29,8 @@ const StoreName = ({storeObj,isOwner})=> {
                     isOwner
                 }
             }}
-        >
+        >       
+                
                 <h3>
                     매장이름: {storeObj.storeName}
                 </h3>
@@ -42,6 +49,10 @@ const StoreName = ({storeObj,isOwner})=> {
                 )}
                 
             </Link>
+            </div>
+            </>
+        )}
+        
     </div>
     );
 
