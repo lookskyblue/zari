@@ -47,7 +47,7 @@ const ShowStoreList = ({userObj,location}) => {
     }, []);
 
     test = storeList;
-
+    localStorage.removeItem("userInfo");
     return (
 
         <div>
