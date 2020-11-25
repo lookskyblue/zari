@@ -17,7 +17,6 @@ const MenuLoad = ({ menus, isStore }) => {
                         메뉴 가격: {menus.Price}
                     </h3>
                 </div>
-                
             )}
         </div>
     );

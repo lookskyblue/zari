@@ -33,7 +33,6 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 const ShowStoreList = ({userObj,location}) => {
     const [storeList, setStoreList] = useState([]);
     
-    console.log(distance(location.latitude,location.longitude,35.778519,128.405640,'K'))//거리측정함수사용
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
         dbService.collection("storeinfo").onSnapshot(snapshot => {
@@ -46,6 +45,8 @@ const ShowStoreList = ({userObj,location}) => {
     }, []);
 
     test = storeList;
+    
+    localStorage.removeItem("userInfo");
 
     return (
 

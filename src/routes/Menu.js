@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import MenuAdd from "./MenuAdd";
 import { authService, dbService } from "fbase";
 import MenuLoad from "./MenuLoad";
-import { SelectedStoreObj } from "../components/StoreName";
 
 const Menu = (storeObj) => {
     const [isLoading, setisLoading] = useState(false);
@@ -31,7 +30,6 @@ const Menu = (storeObj) => {
 
     const iidd = storeObj.location.state.storeObj;
 
-    
     return (
         <div>
             <div>
@@ -46,7 +44,7 @@ const Menu = (storeObj) => {
             </div>
         </div>
     );
-    
+
 
 }
 

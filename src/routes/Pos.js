@@ -16,7 +16,6 @@ class Pos extends React.Component {
               history: this.props.history
             })
           );
-          console.log(JSON.parse(localStorage.getItem("userInfo")));
         }
     }
 
