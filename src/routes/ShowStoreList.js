@@ -5,9 +5,6 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import MapAPI from "../components/googlemap"
 
-
-var test;   // 매장 객체 배열
-
 function distance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
@@ -43,8 +40,6 @@ const ShowStoreList = ({userObj,location}) => {
             setStoreList(storeArray);
         });
     }, []);
-
-    test = storeList;
     
     localStorage.removeItem("userInfo");
 
@@ -60,4 +55,3 @@ const ShowStoreList = ({userObj,location}) => {
 };
 
 export default ShowStoreList;
-export var test;
