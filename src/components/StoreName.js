@@ -16,10 +16,10 @@ const StoreName = ({storeObj,isOwner,isNear})=> {
     return (
         
         
-    <div className="storeInfo">
+    <div>
         {isNear ===1 &&(
             <>
-            <div>
+            <div className="storeInfo">
         <Link 
             
             to={{
