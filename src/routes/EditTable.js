@@ -45,7 +45,6 @@ const EditTable = (storeObj) => {
         await dbService.collection("Tables").add({
             UniqueStoreId: selectedStoreID,
         });
-        
     }
 
 
@@ -54,7 +53,7 @@ const EditTable = (storeObj) => {
         const { target: { value } } = event;
         dbService.collection("Tables").doc(value).delete()
     }
-    console.log(selectedStoreID);
+    //console.log(selectedStoreID);
     return(
         <div>
             <div>
