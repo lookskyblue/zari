@@ -41,12 +41,14 @@ const MenuAdd = ({ storeObj }) => {
     const onFileChange = (event) => {
         const { target: { files } } = event;
         const theFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => {
-            const { currentTarget: { result } } = finishedEvent;
-            setAttachment(result);
+        if (theFile) {  // 파일 선택을 누르고 취소했을 때를 대비한 if문
+            const reader = new FileReader();
+            reader.onloadend = (finishedEvent) => {
+                const { currentTarget: { result } } = finishedEvent;
+                setAttachment(result);
+            }
+            reader.readAsDataURL(theFile);
         }
-        reader.readAsDataURL(theFile);
     }
 
     const onClearAttachment = () => setAttachment(null);
@@ -54,12 +56,13 @@ const MenuAdd = ({ storeObj }) => {
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input type="file" accept="image/*" onChange={onFileChange} />
+                <input type="file" accept="image/*" onChange={onFileChange} required/>
                 {attachment && (
                     <div>
                         <img src={attachment} />
                         <button onClick={onClearAttachment}>취소</button>
-                    </div>)}
+                    </div>)
+                }
                 <input value={MenuName} onChange={onChange2} type="text" placeholder="메뉴 이름" maxLength={50} required />
                 <input value={MenuPrice} onChange={onChange3} type="text" placeholder="메뉴 가격" maxLength={50} required />
                 <input type="submit" value="메뉴 추가" />

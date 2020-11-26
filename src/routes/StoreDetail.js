@@ -42,7 +42,7 @@ const StoreDetail = (storeObj, isNear) => {
     }
 
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
     const [ownerId, setOwnerId] = useState(storeObj.location.state.storeObj.id);
     const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
     const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
@@ -80,7 +80,7 @@ const StoreDetail = (storeObj, isNear) => {
 */
 
     const SpreadReview = () => {  // 토글
-        setIsLoading(!isLoading);
+        setIsClicked(!isClicked);
     };
 
     const [menuList, setMenuList] = useState([]);
@@ -121,7 +121,7 @@ const StoreDetail = (storeObj, isNear) => {
                 <button onClick={SpreadReview} >리뷰</button>
             </div>
             <div>
-                {isLoading ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
+                {isClicked ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
             </div>
         </div>
     )

@@ -6,49 +6,53 @@ import React, { Component } from "react";
 import GoogleApiWrapper from "./googlemap";
 import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const StoreName = ({storeObj,isOwner,isNear})=> {
+const StoreName = ({ storeObj, isOwner, isNear }) => {
 
     return (
 
-    <div>
-        {(
-            <>
-            <div className="storeInfo">
-        <Link 
-            to={{
-                pathname: "/storeDetail",
-                state: {
-                    storeObj,
-                    isOwner
-                }
-            }}
-        >       
-                
-                <h3>
-                    매장이름: {storeObj.storeName}
-                </h3>
-            
-                {isOwner && (
-                    <>
-                    <Link to={
-                    {pathname:"/Pos",
-                    state: {
-                    storeObj,
-                    isOwner}
-                    }}>
-                    <button className="infoEdit">관리</button>
-                    </Link>
-                    </>
-                )}
-                
-            </Link>
-            </div>
-            </>
-        )}
-        
-    </div>
+        <div>
+            {(
+                <>
+                    <div className="storeInfo">
+                        <Link
+                            to={{
+                                pathname: "/storeDetail",
+                                state: {
+                                    storeObj,
+                                    isOwner
+                                }
+                            }}
+                        >
+                            <div className="storeInfo__imgContainer">
+                                {storeObj.attachmentUrl && <img className="storeInfo__img" src={storeObj.attachmentUrl} />}
+                            </div>
+                            <h3 className="storeInfo__name">
+                                매장이름: {storeObj.storeName}
+                            </h3>
+
+                            {isOwner && (
+                                <>
+                                    <Link to={
+                                        {
+                                            pathname: "/Pos",
+                                            state: {
+                                                storeObj,
+                                                isOwner
+                                            }
+                                        }}>
+                                        <button className="infoEdit">관리</button>
+                                    </Link>
+                                </>
+                            )}
+
+                        </Link>
+                    </div>
+                </>
+            )}
+
+        </div>
     );
 
 }

@@ -9,10 +9,10 @@ import { authService, dbService } from "fbase";
 import MenuLoad from "./MenuLoad";
 
 const Menu = (storeObj) => {
-    const [isLoading, setisLoading] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     const SpreadMenuAdd = () => {
-        setisLoading(!isLoading);
+        setIsClicked(!isClicked);
     }
 
     const [menuList, setMenuList] = useState([]);
@@ -40,7 +40,7 @@ const Menu = (storeObj) => {
 
             <button onClick={SpreadMenuAdd}>메뉴 추가</button>
             <div>
-                {isLoading ? <MenuAdd storeObj={selectedStoreID} /> : ""}
+                {isClicked ? <MenuAdd storeObj={selectedStoreID} /> : ""}
             </div>
         </div>
     );

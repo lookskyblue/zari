@@ -24,6 +24,36 @@ body{
     width: 100%;
 }
 
+.storeInfo > a {
+    display: flex;
+    justify-content: center;    /* 여기서 선택버튼 */
+    z-index: 0;
+    width: 100%;
+    padding: 10px;
+    color: #333;
+}
+
+.storeInfo a:hover{
+    cursor: pointer;
+    background: #cfd8dc;
+    border-radius: 8px;
+}
+
+.storeInfo__imgContainer {
+    padding-right: 20px;
+}
+
+.storeInfo__img {
+    width: 200px;
+    height: 200px;
+}
+
+.storeInfo__name {
+    display: flex;
+    align-items: center;
+}
+
+
 #root > div > div:nth-child(1) {
     margin-top:140px;
 }
@@ -31,14 +61,6 @@ body{
 #root>div{
     margin: 10px;
     margin-top: 140px;
-}
-
-
-.storeInfo__name
-{
-    width : 100%;
-    margin: 5px 0 ;
-    text-align: center;
 }
 
 .loginForm{ 
@@ -86,21 +108,6 @@ footer{
     display: flex;
     justify-content: center;
     padding-top: 55px;
-}
-
-.storeInfo > a {
-    display: flex;
-    justify-content: center;    /* 여기서 선택버튼 */
-    z-index: 0;
-    width: 100%;
-    padding: 10px;
-    color: #333;
-}
-
-.storeInfo a:hover{
-    cursor: pointer;
-    background: #cfd8dc;
-    border-radius: 8px;
 }
 
 .nav__container {
