@@ -27,6 +27,7 @@ const MenuAndPrice = (StoreObj) => {
                 <MenuLoad key={obj.id} menus={obj} isStore={true}/>
                  ))}
             </div>
+            
         </div>
     )
 }
