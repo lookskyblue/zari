@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import MenuLoad from "./MenuLoad";
 import Menu from "./Menu";
 
+
 const StoreDetail = (storeObj, isNear) => {
 
     /*
@@ -26,30 +27,58 @@ const StoreDetail = (storeObj, isNear) => {
             );
         }
     }
-
     refesh();
     */
 
+    if (storeObj !== undefined) {
+        localStorage.setItem(
+            "userInfo2",
+            JSON.stringify({
+                location: storeObj.location
+            }),
+
+        );
+    } else {
+        setting();
+    }
+
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [ownerId, setOwnerId] = useState(storeObj.location.state.storeObj.id);
+    const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
+    const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
+    const [storeTime, setStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
 
     const setting = () => {
-        setLoadLocalStorage(JSON.parse(localStorage.getItem("userInfo")));
+        setLoadLocalStorage(JSON.parse(localStorage.getItem("userInfo2")));
         setOwnerId(loadLocalStorage.location.state.storeObj.id)
         setStoreName(loadLocalStorage.location.state.storeObj.storeName)
         setStoreIntro(loadLocalStorage.location.state.storeObj.storeIntro)
         setStoreTime(loadLocalStorage.location.state.storeObj.storeTime)
     }
 
-    if (localStorage.getItem("userInfo")) {
-        setting();
-    }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
+    //console.log(storeObj);
 
-    console.log("StoreDetail : " + storeObj.location.state.storeObj.id); // 내가 선택한 매장 id
-    const [isLoading, setIsLoading] = useState(false);
-    const [ownerId, setOwnerId] = useState(storeObj.location.state.storeObj.id);
-    const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
-    const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
-    const [storeTime, setStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
+    /*
+   if (storeObj !== undefined) {
+    localStorage.setItem(
+        "userInfo2",
+        JSON.stringify({
+            location: storeObj.location
+        }),
+        
+    );
+    setOwnerId(storeObj.location.state.storeObj.id);
+    setStoreName(storeObj.location.state.storeObj.storeName);
+    setStoreIntro(storeObj.location.state.storeObj.storeIntro);
+    setStoreTime(storeObj.location.state.storeObj.storeTime);
+    console.log(storeName);//여기까지는 넣어지고
+    } else {
+        setting();
+    }
+
+    console.log(localStorage.getItem("userInfo2"));
+    */
 
     const SpreadReview = () => {  // 토글
         setIsLoading(!isLoading);
@@ -97,78 +126,5 @@ const StoreDetail = (storeObj, isNear) => {
         </div>
     )
 }
-
-/*
-class StoreDetail extends React.Component {
-    state = {
-        isLoading: false
-    };
-
-    componentDidMount() {
-        const { location, history } = this.props;
-        //로컬 스토리지에 저장해서 새로고침해도 상관없도록!
-        if (location.state !== undefined) {
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                    location: this.props.location,
-                    history: this.props.history
-                })
-            );
-        }
-    }
-
-    SpreadReview = () => {  // 토글
-        this.setState(current => ({ isLoading: !current.isLoading }))
-    };
-
-
-    render() {
-
-
-        if (localStorage.getItem("userInfo")) {
-            this.props = JSON.parse(localStorage.getItem("userInfo"));
-        }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
-
-
-        const { isLoading } = this.state;
-        const { location } = this.props;
-        const ownerId = location.state.storeObj.id;
-        const storeName = location.state.storeObj.storeName;
-        const storeIntro = location.state.storeObj.storeIntro;
-        const storeTime = location.state.storeObj.Time;
-
-        console.log("StoreDetail : "+this.props.location.state.storeObj.id);
-        
-        return ( // 가게 정보 필요한거 있으면 추가로 넣어줄 것
-            <div>
-                
-                <ul className="storeDetail">
-                    <li className="storeDetail__Logo">
-                        매장 로고 : 로고 이미지
-                </li>
-                    <li className="storeDetail__Name">
-                        {storeName}
-                    </li>
-                    <li className="storeDetail__Intro">
-                        매장 소개 : {storeIntro}
-                    </li>
-                    <li className="storeDetail__Time">
-                        매장 영업시간 : {storeTime}
-                    </li>
-                </ul>
-                <div className="storeDetail__Btn">
-                    <button onClick={this.SpreadReview} >리뷰</button>
-                </div>
-                <div>
-                    {isLoading ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
-                </div>
-
-            </div>
-
-        );
-    }
-}
-*/
 
 export default StoreDetail;

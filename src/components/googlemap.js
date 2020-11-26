@@ -38,10 +38,12 @@ class MapAPI extends Component {
       width: '100%',
       height: '100%'
     }
+    const storeArray = this.props.storeList;
 
     return (
-
+      
       <div className='MapAPI' style={{ height: '100vh', width: '100vh', }} >
+        
         <Map
           onClick={this.onMapClicked}
           google={this.props.google}
@@ -56,6 +58,11 @@ class MapAPI extends Component {
               <h1>{this.state.selectedPlace.name}</h1>
             </div>
           </InfoWindow>
+
+          {storeArray.map((obj) => (
+                <Marker key={obj.id} name={obj.storeName} title={'근처매장'}
+                name={'매장'} position={{lat: obj.location.latitude, lng:obj.location.longitude} }/>
+            ))}
 
           <Marker
             onClick={this.onMarkerClick} name={"매장위치"}
