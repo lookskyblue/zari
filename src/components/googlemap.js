@@ -55,14 +55,14 @@ class MapAPI extends Component {
 
           <Marker onClick={this.onMarkerClick} name={"현재위치"} >
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+            <div >
+              <h1>test</h1>
             </div>
           </InfoWindow>
           </Marker>
 
           {storeArray !==0 && storeArray.map((obj) => (
-                <Marker key={obj.id} name={obj.storeName} title={'근처매장'} onClick={this.onMarkerClick}
+                <Marker key={obj.id} name={obj.storeName} title={'근처매장'} 
                 name={"매장"} position={{lat:obj.location.latitude, lng:obj.location.longitude}} icon={{
                   url: "http://maps.google.com/mapfiles/ms/icons/blue.png"
                 }}>
