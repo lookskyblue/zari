@@ -47,7 +47,9 @@ const ShowStoreList = ({userObj,location}) => {
     console.log(location);
     
     localStorage.removeItem("userInfo");
-    
+    localStorage.removeItem("userInfo2");
+    localStorage.removeItem("storeMenu");
+
     storeList.map((obj)=>{
         
         if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
