@@ -32,7 +32,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
 const ShowStoreList = ({userObj,location}) => {
     const [storeList, setStoreList] = useState([]);
-    
+    const nearStoreList = [];
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
         dbService.collection("storeinfo").onSnapshot(snapshot => {
@@ -46,11 +46,16 @@ const ShowStoreList = ({userObj,location}) => {
 
     
     localStorage.removeItem("userInfo");
-
+    storeList.map((obj)=>{
+        if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
+            nearStoreList.push(obj);
+        }
+    });
+    //console.log(nearStoreList);
     return (
 
         <div>
-            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }}/>
+            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }} storeList={nearStoreList}/>
             {storeList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} isNear={distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5? 1:2}/>
             ))}
