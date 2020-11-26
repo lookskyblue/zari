@@ -9,6 +9,18 @@ import { authService, dbService } from "fbase";
 import MenuLoad from "./MenuLoad";
 
 const Menu = (storeObj) => {
+
+    if (!localStorage.getItem("storeMenu")) {
+        localStorage.setItem(
+            "storeMenu",
+            JSON.stringify({
+                storeObj: storeObj,
+            }),
+        )}
+        else{
+            storeObj=JSON.parse(localStorage.getItem("storeMenu")).storeObj;
+        }
+
     const [isLoading, setisLoading] = useState(false);
 
     const SpreadMenuAdd = () => {

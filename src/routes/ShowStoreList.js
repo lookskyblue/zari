@@ -40,11 +40,16 @@ const ShowStoreList = ({ userObj, location }) => {
             setStoreList(storeArray);
         });
     }, []);
-
+    console.log("fuck");
+    console.log(location);
+    
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("userInfo2");
+    localStorage.removeItem("storeMenu");
 
-    storeList.map((obj) => {
-        if (distance(location.latitude, location.longitude, obj.location.latitude, obj.location.longitude, 'K') < 5) {
+    storeList.map((obj)=>{
+        
+        if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
             nearStoreList.push(obj);
         }
     });
@@ -52,9 +57,10 @@ const ShowStoreList = ({ userObj, location }) => {
     return (
 
         <div>
-            <MapAPI initialCenter={{ lat: location.latitude, lng: location.longitude }} storeList={nearStoreList} />
-            {storeList.map((obj) => (
-                <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} isNear={distance(location.latitude, location.longitude, obj.location.latitude, obj.location.longitude, 'K') < 5 ? 1 : 2} />
+            
+            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }} storeList={nearStoreList}/>
+            {nearStoreList.map((obj) => (
+                <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} />
             ))}
         </div>
     );//여기서 css수정

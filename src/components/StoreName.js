@@ -11,11 +11,14 @@ import { Link } from "react-router-dom";
 
 const StoreName = ({ storeObj, isOwner, isNear }) => {
     return (
+
+
         <div>
-            {isNear === 1 && (
+            {(
                 <>
                     <div className="storeInfo">
                         <Link
+
                             to={{
                                 pathname: "/storeDetail",
                                 state: {
