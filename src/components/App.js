@@ -13,7 +13,7 @@ function App() {
   if (navigator.geolocation) { // GPS를 지원하면
     navigator.geolocation.getCurrentPosition(pos=>{
       setLocation(pos.coords);
-        //console.log(pos.coords);
+        console.log(pos.coords);
     },
     error =>{
         console.error(error);
@@ -29,7 +29,7 @@ function App() {
     alert('위치정보 불러오기 실패');
   }
   
-  
+  console.log("APPLOcation");
   console.log(location);
   localStorage.setItem(
     "userLocation",

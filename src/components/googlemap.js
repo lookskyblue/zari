@@ -52,16 +52,23 @@ class MapAPI extends Component {
           style={mapStyles}
         >
 
-          <Marker onClick={this.onMarkerClick} name={"현재위치"} />
+          <Marker onClick={this.onMarkerClick} name={"현재위치"} >
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
             <div>
               <h1>{this.state.selectedPlace.name}</h1>
             </div>
           </InfoWindow>
+          </Marker>
 
           {storeArray.map((obj) => (
                 <Marker key={obj.id} name={obj.storeName} title={'근처매장'}
-                name={'매장'} position={{lat: obj.location.latitude, lng:obj.location.longitude} }/>
+                name={'매장'} position={{lat: obj.location.latitude, lng:obj.location.longitude} }>
+                  <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+                      <div>
+                        <h1>{}</h1>
+                      </div>
+                    </InfoWindow>
+                </Marker>
             ))}
 
           <Marker
@@ -69,6 +76,7 @@ class MapAPI extends Component {
             title={'근처매장'}
             name={'매장'}
             position={{ lat: 35.778519, lng: 128.405640 }} >
+
             <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
               <div>
                 <h1>test
