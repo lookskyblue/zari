@@ -12,8 +12,10 @@ function App() {
   
   if (navigator.geolocation) { // GPS를 지원하면
     navigator.geolocation.getCurrentPosition(pos=>{
-        setLocation(pos.coords);
-        
+      setLocation(pos.coords);
+        //console.log(pos.coords);
+        console.log("셋로캐션")
+        console.log(pos.coords)
     },
     error =>{
         console.error(error);
@@ -23,11 +25,26 @@ function App() {
         maximumAge: 0,
         timeout: Infinity
     }
-    ); 
+    );
   } else {
+    
     alert('위치정보 불러오기 실패');
   }
-
+  
+  console.log("App.js의 로케이션")
+  console.log(location);
+  
+  if(location!==undefined) {
+  localStorage.setItem(
+    "userLocation",
+    JSON.stringify({
+      latitude: location.latitude,
+      longitude: location.longitude
+    })
+  );
+  }
+  console.log("App.js의 로컬스토리지 겟")
+  console.log(localStorage.getItem("userLocation"));
   
   useEffect(() => {
     authService.onAuthStateChanged((user)=> {

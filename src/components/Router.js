@@ -29,7 +29,7 @@ const AppRouter  = ({isLoggedIn,userObj,location}) => {
             </Route>
 
             <Route exact path="/Home">
-              <Home userObj={userObj} />
+              <Home userObj={userObj} location={location} />
             </Route>
 
             <Route exact path="/storeDetail" component={StoreDetail} />

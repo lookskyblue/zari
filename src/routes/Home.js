@@ -4,9 +4,9 @@ import firebase from "firebase/app";
 import ShowStoreList from "./ShowStoreList";
 import { useHistory } from "react-router-dom";
 
-const Home = ({ userObj }) => {
+const Home = ({ userObj, location}) => {
 
-    const [location, setLocation] = useState();
+    //const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
     const [storeTime, setStoreTime] = useState("");
@@ -15,9 +15,11 @@ const Home = ({ userObj }) => {
 
     const history = useHistory();
 
+    /*
     if (navigator.geolocation) { // GPS를 지원하면
         navigator.geolocation.getCurrentPosition(pos => {
             setLocation(pos.coords);
+            console.log(location);
         },
             error => {
                 console.error(error);
@@ -31,7 +33,7 @@ const Home = ({ userObj }) => {
     } else {
         alert('위치정보 불러오기 실패');
     }
-    //위치정보 불러오기
+    //위치정보 불러오기*/
     const onSubmit = async (event) => {
 
         event.preventDefault();
@@ -41,7 +43,8 @@ const Home = ({ userObj }) => {
             storeIntro,
             storeOnwer: userObj.email,
             UID: userObj.uid, // 사용자 유니크 id
-            Time: storeTime
+            Time: storeTime,
+            tableN:0
         });
 
         setStoreName("");

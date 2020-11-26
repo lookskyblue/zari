@@ -28,19 +28,21 @@ const Menu = (storeObj) => {
         });
     }, []);
 
-    const iidd = storeObj.location.state.storeObj;
+    const selectedStoreID = storeObj.location.state.storeObj;  // selectedStoreID는 내가 선택한 매장의 storeID
+
+    console.log(storeObj);
 
     return (
         <div>
             <div>
             {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
-                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===iidd}/>
+                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===selectedStoreID}/>
                  ))}
             </div>
             
             <button onClick={SpreadMenuAdd}>메뉴 추가</button>
             <div>
-                {isLoading ? <MenuAdd storeObj={iidd}/> : ""}
+                {isLoading ? <MenuAdd storeObj={selectedStoreID}/> : ""}
             </div>
         </div>
     );

@@ -5,10 +5,10 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import MapAPI from "../components/googlemap"
 
-
-var test;   // 매장 객체 배열
-
 function distance(lat1, lon1, lat2, lon2, unit) {
+    console.log("디스턴스 들옴")
+    console.log(lat1)
+    console.log(lat2)
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
     }
@@ -32,7 +32,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
 const ShowStoreList = ({userObj,location}) => {
     const [storeList, setStoreList] = useState([]);
-    
+    const nearStoreList = [];
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
         dbService.collection("storeinfo").onSnapshot(snapshot => {
@@ -44,14 +44,23 @@ const ShowStoreList = ({userObj,location}) => {
         });
     }, []);
 
-    test = storeList;
     
     localStorage.removeItem("userInfo");
-
+    
+    storeList.map((obj)=>{
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        console.log(location.latitude)
+        console.log(obj.location.latitude)
+        if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
+            nearStoreList.push(obj);
+        }
+    });
+    //console.log(nearStoreList);
     return (
 
         <div>
-            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }}/>
+            {console.log("쇼스토리스트"),console.log(location.latitude)}
+            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }} storeList={nearStoreList}/>
             {storeList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} isNear={distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5? 1:2}/>
             ))}
@@ -60,4 +69,3 @@ const ShowStoreList = ({userObj,location}) => {
 };
 
 export default ShowStoreList;
-export var test;
