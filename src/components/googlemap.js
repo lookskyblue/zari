@@ -23,7 +23,7 @@ class MapAPI extends Component {
       activeMarker: marker,
       showingInfoWindow: true
     });
-
+    
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -39,7 +39,8 @@ class MapAPI extends Component {
       height: '100%'
     }
     const storeArray = this.props.storeList;
-    console.log(this.props)
+    console.log(this.state)
+    
     return (
       
       <div className='MapAPI' style={{ height: '100vh', width: '100vh', }} >
@@ -60,18 +61,16 @@ class MapAPI extends Component {
           </InfoWindow>
           </Marker>
 
-          {storeArray.map((obj) => (
-                <Marker key={obj.id} name={obj.storeName} title={'근처매장'}
-                name={'매장'} position={{lat: obj.location.latitude, lng:obj.location.longitude} }>
-                  <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-                      <div>
-                        <h1>{}</h1>
-                      </div>
-                    </InfoWindow>
+          {storeArray !==0 && storeArray.map((obj) => (
+                <Marker key={obj.id} name={obj.storeName} title={'근처매장'} onClick={this.onMarkerClick}
+                name={"매장"} position={{lat:obj.location.latitude, lng:obj.location.longitude}} icon={{
+                  url: "http://maps.google.com/mapfiles/ms/icons/blue.png"
+                }}>
+                  
                 </Marker>
             ))}
 
-          <Marker
+          {/* <Marker
             onClick={this.onMarkerClick} name={"매장위치"}
             title={'근처매장'}
             name={'매장'}
@@ -83,7 +82,7 @@ class MapAPI extends Component {
                 </h1>
               </div>
             </InfoWindow>
-          </Marker>
+          </Marker> */}
         </Map>
       </div>
     );

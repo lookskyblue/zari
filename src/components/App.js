@@ -13,7 +13,8 @@ function App() {
   if (navigator.geolocation) { // GPS를 지원하면
     navigator.geolocation.getCurrentPosition(pos=>{
       setLocation(pos.coords);
-        console.log(pos.coords);
+        //console.log(pos.coords);
+      
     },
     error =>{
         console.error(error);
@@ -29,16 +30,17 @@ function App() {
     alert('위치정보 불러오기 실패');
   }
   
-  console.log("APPLOcation");
-  console.log(location);
+
+  if(location!==undefined) {
   localStorage.setItem(
     "userLocation",
     JSON.stringify({
-      latitude: location,
-      longitude: location
+      latitude: location.latitude,
+      longitude: location.longitude
     })
   );
-  console.log(localStorage.getItem("userLocation"));
+  }
+  
   
   useEffect(() => {
     authService.onAuthStateChanged((user)=> {
@@ -55,7 +57,6 @@ function App() {
   return (
     <>
       {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} location={location}/> : "Initializing..."}
-      {console.log(location)}
       <footer>&copy; {new Date().getFullYear()} ZARI</footer>
     </>
   );

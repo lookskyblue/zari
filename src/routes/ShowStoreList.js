@@ -5,10 +5,10 @@ import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import MapAPI from "../components/googlemap"
 
-
-
-
 function distance(lat1, lon1, lat2, lon2, unit) {
+    console.log("디스턴스 들옴")
+    console.log(lat1)
+    console.log(lat2)
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
     }
@@ -47,7 +47,9 @@ const ShowStoreList = ({userObj,location}) => {
     console.log(location);
     
     localStorage.removeItem("userInfo");
+    
     storeList.map((obj)=>{
+        
         if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
             nearStoreList.push(obj);
         }
@@ -56,6 +58,7 @@ const ShowStoreList = ({userObj,location}) => {
     return (
 
         <div>
+            
             <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }} storeList={nearStoreList}/>
             {nearStoreList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} />

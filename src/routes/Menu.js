@@ -50,35 +50,4 @@ const Menu = (storeObj) => {
 
 }
 
-
-/*
-class Menu extends React.Component {
-    state = {
-        isLoading: false,
-    };
-    
-    SpreadMenuAdd = () => {  // 토글
-        this.setState(current => ({ isLoading: !current.isLoading }))
-    };
-
-    render() {
-        const { isLoading, MenuImage, Name, Price } = this.state;
-        const { location, history } = this.props;        
-        
-        return (
-            <div>
-                <div>
-                    
-                </div>
-                <button onClick={this.SpreadMenuAdd}>메뉴 추가</button>
-                <div>
-                {isLoading ? <MenuAdd storeObj={location.state.storeObj}/> : "" }
-                </div>
-            </div>
-        );
-    }
-}
-*/
-
-
 export default Menu;
