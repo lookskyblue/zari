@@ -30,20 +30,20 @@ const StoreDetail = (storeObj, isNear) => {
     refesh();
     */
 
-   if (storeObj !== undefined) {
-    localStorage.setItem(
-        "userInfo2",
-        JSON.stringify({
-            location: storeObj.location
-        }),
-        
-    );
-}else{
-    setting();
-}
+    if (storeObj !== undefined) {
+        localStorage.setItem(
+            "userInfo2",
+            JSON.stringify({
+                location: storeObj.location
+            }),
 
-   const [loadLocalStorage, setLoadLocalStorage] = useState("");
-   const [isLoading, setIsLoading] = useState(false);
+        );
+    } else {
+        setting();
+    }
+
+    const [loadLocalStorage, setLoadLocalStorage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const [ownerId, setOwnerId] = useState(storeObj.location.state.storeObj.id);
     const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
     const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
