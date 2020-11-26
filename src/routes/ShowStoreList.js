@@ -31,7 +31,6 @@ const ShowStoreList = ({ userObj, location }) => {
     const [storeList, setStoreList] = useState([]);
     const nearStoreList = [];
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
-
         dbService.collection("storeinfo").onSnapshot(snapshot => {
             const storeArray = snapshot.docs.map(doc => ({
                 id: doc.id,
@@ -40,25 +39,19 @@ const ShowStoreList = ({ userObj, location }) => {
             setStoreList(storeArray);
         });
     }, []);
-    console.log("fuck");
-    console.log(location);
-    
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userInfo2");
     localStorage.removeItem("storeMenu");
 
-    storeList.map((obj)=>{
-        
-        if(distance(location.latitude,location.longitude,obj.location.latitude,obj.location.longitude,'K')<5){
+    storeList.map((obj) => {
+        if (distance(location.latitude, location.longitude, obj.location.latitude, obj.location.longitude, 'K') < 5) {
             nearStoreList.push(obj);
         }
     });
 
     return (
-
         <div>
-            
-            <MapAPI initialCenter={{ lat:location.latitude, lng:location.longitude }} storeList={nearStoreList}/>
+            <MapAPI initialCenter={{ lat: location.latitude, lng: location.longitude }} storeList={nearStoreList} />
             {nearStoreList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} />
             ))}

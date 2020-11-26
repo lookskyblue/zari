@@ -3,6 +3,8 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 import { Router } from "react-router-dom";
 
+var uObj;
+
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +54,9 @@ function App() {
       setInit(true);
     });
   }, []);
+
+  uObj = userObj;
+
   return (
     <>
       {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} location={location} /> : "Initializing..."}
@@ -61,3 +66,4 @@ function App() {
 }
 
 export default App;
+export var uObj;

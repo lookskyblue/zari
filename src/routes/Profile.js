@@ -8,10 +8,9 @@ export default () => {
         authService.signOut();
         history.push("/");
     }
-    return(
+    return (
         <div>
-        <button onClick={onLogoutClick}>Log Out</button>
+            <button onClick={onLogoutClick}>Log Out</button>
         </div>
-        
     );
 };

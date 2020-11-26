@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
@@ -11,19 +11,19 @@ import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
 import Menu from "../routes/Menu"
 
-const AppRouter  = ({isLoggedIn,userObj,location}) => {
+const AppRouter = ({ isLoggedIn, userObj, location }) => {
   return (
     <Router>
-      {isLoggedIn }
-      
+      {isLoggedIn}
+
       <Switch>
         {isLoggedIn ? (
           <>
-            <Navigation/>
+            <Navigation />
             <Route exact path="/">
               <ShowStoreList userObj={userObj} location={location} />
             </Route>
-            
+
             <Route exact path="/Profile">
               <Profile />
             </Route>
@@ -33,22 +33,22 @@ const AppRouter  = ({isLoggedIn,userObj,location}) => {
             </Route>
 
             <Route exact path="/storeDetail" component={StoreDetail} />
-            
-            <Route exact path= /*{'/${Review}'}*/"/Pos" component={Pos} />
-            <Route exact path= /*{'/${Review}'}*/"/PosEdit" component={PosEdit} />
+
+            <Route exact path="/Pos" component={Pos} />
+            <Route exact path="/PosEdit" component={PosEdit} />
             <Route exact path="/Menu" component={Menu} />
-            
-            <Navigation/>
+
+            <Navigation />
           </>
-          
+
         ) : (
-          <Route exact path="/">
-            <Auth />
-          </Route>
-        )}
-        
+            <Route exact path="/">
+              <Auth />
+            </Route>
+          )}
+
       </Switch>
-      
+
     </Router>
   );
 };

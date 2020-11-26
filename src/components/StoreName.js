@@ -8,17 +8,13 @@ import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 const StoreName = ({ storeObj, isOwner, isNear }) => {
     return (
-
-
         <div>
             {(
                 <>
                     <div className="storeInfo">
                         <Link
-
                             to={{
                                 pathname: "/storeDetail",
                                 state: {
@@ -27,11 +23,12 @@ const StoreName = ({ storeObj, isOwner, isNear }) => {
                                 }
                             }}
                         >
-
-                            <h3>
+                            <div className="storeInfo__imgContainer">
+                                {storeObj.attachmentUrl && <img className="storeInfo__img" src={storeObj.attachmentUrl} />}
+                            </div>
+                            <h3 className="storeInfo__name">
                                 매장이름: {storeObj.storeName}
                             </h3>
-
                             {isOwner && (
                                 <>
                                     <Link to={
@@ -46,7 +43,6 @@ const StoreName = ({ storeObj, isOwner, isNear }) => {
                                     </Link>
                                 </>
                             )}
-
                         </Link>
                     </div>
                 </>
