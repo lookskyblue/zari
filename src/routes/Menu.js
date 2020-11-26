@@ -35,19 +35,17 @@ const Menu = (storeObj) => {
     return (
         <div>
             <div>
-            {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
-                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===selectedStoreID}/>
-                 ))}
+                {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
+                    <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === selectedStoreID} />
+                ))}
             </div>
-            
+
             <button onClick={SpreadMenuAdd}>메뉴 추가</button>
             <div>
-                {isLoading ? <MenuAdd storeObj={selectedStoreID}/> : ""}
+                {isLoading ? <MenuAdd storeObj={selectedStoreID} /> : ""}
             </div>
         </div>
     );
-
-
 }
 
 export default Menu;

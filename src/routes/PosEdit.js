@@ -21,16 +21,12 @@ class PosEdit extends React.Component {
               history: this.props.history
             })
           );
-          console.log(JSON.parse(localStorage.getItem("userInfo")));
         }      
         this.setState({
             count: location.state.storeObj.tableN,
             location:location
         });
-        console.log(location.state.storeObj.tableN)
-    }
-
-    
+    }   
     
     modify = n => {
         this.setState({
@@ -47,7 +43,6 @@ class PosEdit extends React.Component {
             this.props= JSON.parse(localStorage.getItem("userInfo"));
             }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
             const { location, history } = this.props; 
-            console.log(location.state.storeObj.tableN)
             const {count} =this.state;
         return (
         <div> 

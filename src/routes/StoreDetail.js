@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import MenuLoad from "./MenuLoad";
 import Menu from "./Menu";
 
-
 const StoreDetail = (storeObj, isNear) => {
 
     /*
@@ -73,11 +72,11 @@ const StoreDetail = (storeObj, isNear) => {
     setStoreIntro(storeObj.location.state.storeObj.storeIntro);
     setStoreTime(storeObj.location.state.storeObj.storeTime);
     console.log(storeName);//여기까지는 넣어지고
-}else{
-    setting();
-}
+    } else {
+        setting();
+    }
 
-   console.log(localStorage.getItem("userInfo2"));
+    console.log(localStorage.getItem("userInfo2"));
 */
 
     const SpreadReview = () => {  // 토글
@@ -112,7 +111,8 @@ const StoreDetail = (storeObj, isNear) => {
                     매장 영업시간 : {storeTime}
                 </li>
             </ul>
-            <div>
+            <div className="storeDetail__menu">
+                <p>Menu</p>
                 {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
                     <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === ownerId} />
                 ))}

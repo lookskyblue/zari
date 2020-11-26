@@ -8,19 +8,15 @@ import Pos from "../routes/Pos";
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
-
 const StoreName = ({storeObj,isOwner,isNear})=> {
 
-    
     return (
-        
-        
+
     <div>
         {(
             <>
             <div className="storeInfo">
         <Link 
-            
             to={{
                 pathname: "/storeDetail",
                 state: {

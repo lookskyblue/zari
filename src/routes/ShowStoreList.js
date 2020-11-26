@@ -40,7 +40,7 @@ const ShowStoreList = ({ userObj, location }) => {
             setStoreList(storeArray);
         });
     }, []);
-
+    
     localStorage.removeItem("userInfo");
 
     storeList.map((obj) => {
