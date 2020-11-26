@@ -10,6 +10,8 @@ import StoreDetail from "../routes/StoreDetail"
 import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
 import Menu from "../routes/Menu"
+import EditTable from "../routes/EditTable";
+import MenuAndPrice from "routes/MenuAndPrice";
 
 const AppRouter  = ({isLoggedIn,userObj,location}) => {
   return (
@@ -37,6 +39,13 @@ const AppRouter  = ({isLoggedIn,userObj,location}) => {
             <Route exact path= /*{'/${Review}'}*/"/Pos" component={Pos} />
             <Route exact path= /*{'/${Review}'}*/"/PosEdit" component={PosEdit} />
             <Route exact path="/Menu" component={Menu} />
+            <Route exact path="/MenuAndPrice" component={MenuAndPrice} />
+
+            <Route exact path="/EditTable" component={EditTable} />
+            {/* <Route exact path="/EditTable">
+              <EditTable />
+            </Route> */}
+
             
             <Navigation/>
           </>
