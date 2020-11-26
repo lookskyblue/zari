@@ -48,7 +48,7 @@ class PosEdit extends React.Component {
         <div> 
             <ul>
                 <li> 
-                    가게 수정
+                    테이블 관리
                 </li>
                     테이블 수: {count}
                     <button onClick={() => this.modify(count +1)}>증가</button>

@@ -9,6 +9,7 @@ import ReviewPage from "./ReviewPage";
 import { Link } from "react-router-dom";
 import MenuLoad from "./MenuLoad";
 import Menu from "./Menu";
+import { uObj } from "../components/App";
 
 const StoreDetail = (storeObj, isNear) => {
 
@@ -47,6 +48,34 @@ const StoreDetail = (storeObj, isNear) => {
     const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
     const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
     const [storeTime, setStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
+
+    const [editing, setEditing] = useState(false);
+    const [newStoreName, setNewStoreName] = useState(storeObj.location.state.storeObj.storeName);
+    const [newStoreIntro, setNewStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
+    const [newStoreTime, setNewStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
+
+    const toggleEditing = () => setEditing((prev) => !prev);
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).update({
+            storeName: newStoreName,
+            storeIntro: newStoreIntro,
+            Time: newStoreTime
+        })
+        setEditing(false);
+    }
+    const onChange1 = (event) => {
+        const {target: {value}} = event;
+        setNewStoreName(value);
+    }
+    const onChange2 = (event) => {
+        const {target: {value}} = event;
+        setNewStoreIntro(value);
+    }
+    const onChange3 = (event) => {
+        const {target: {value}} = event;
+        setNewStoreTime(value);
+    }
 
     const setting = () => {
         setLoadLocalStorage(JSON.parse(localStorage.getItem("userInfo2")));
@@ -95,34 +124,52 @@ const StoreDetail = (storeObj, isNear) => {
         });
     }, []);
 
+    console.log(uObj.uid);
+    console.log(storeObj.location.state.storeObj.UID);
+
     return (
         <div>
-            <ul className="storeDetail">
-                <li className="storeDetail__Logo">
-                    매장 로고 : 로고 이미지
-                </li>
-                <li className="storeDetail__Name">
-                    {storeName}
-                </li>
-                <li className="storeDetail__Intro">
-                    매장 소개 : {storeIntro}
-                </li>
-                <li className="storeDetail__Time">
-                    매장 영업시간 : {storeTime}
-                </li>
-            </ul>
-            <div className="storeDetail__menu">
-                <p>Menu</p>
-                {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
-                    <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === ownerId} />
-                ))}
-            </div>
-            <div className="storeDetail__Btn">
-                <button onClick={SpreadReview} >리뷰</button>
-            </div>
-            <div>
-                {isClicked ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
-            </div>
+            {
+                editing ?
+                    <>
+                        <form onSubmit={onSubmit}>
+                            <input type="text" placeholder="새로운 매장 이름" value={newStoreName} onChange={onChange1} required />
+                            <input type="text" placeholder="새로운 매장 설명" value={newStoreIntro} onChange={onChange2} required />
+                            <input type="text" placeholder="새로운 매장 영업 시간" value={newStoreTime} onChange={onChange3} required />
+                            <input type="submit" value="수정" />
+                        </form>
+                        <button onClick={toggleEditing}>취소</button>
+                    </> :
+                    <>
+                        {uObj.uid=== storeObj.location.state.storeObj.UID && <button onClick={toggleEditing}>매장 정보 수정</button>}
+                        <ul className="storeDetail">
+                            <li className="storeDetail__Logo">
+                                매장 로고 : 로고 이미지
+                            </li>
+                            <li className="storeDetail__Name">
+                                {storeName}
+                            </li>
+                            <li className="storeDetail__Intro">
+                                매장 소개 : {storeIntro}
+                            </li>
+                            <li className="storeDetail__Time">
+                                매장 영업시간 : {storeTime}
+                            </li>
+                        </ul>
+                        <div className="storeDetail__menu">
+                            <p>Menu</p>
+                            {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
+                                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === ownerId} />
+                            ))}
+                        </div>
+                        <div className="storeDetail__Btn">
+                            <button onClick={SpreadReview} >리뷰</button>
+                        </div>
+                        <div>
+                            {isClicked ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
+                        </div>
+                    </>
+            }
         </div>
     )
 }

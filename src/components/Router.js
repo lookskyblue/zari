@@ -34,8 +34,8 @@ const AppRouter  = ({isLoggedIn,userObj,location}) => {
 
             <Route exact path="/storeDetail" component={StoreDetail} />
             
-            <Route exact path= /*{'/${Review}'}*/"/Pos" component={Pos} />
-            <Route exact path= /*{'/${Review}'}*/"/PosEdit" component={PosEdit} />
+            <Route exact path="/Pos" component={Pos} />
+            <Route exact path="/PosEdit" component={PosEdit} />
             <Route exact path="/Menu" component={Menu} />
             
             <Navigation/>
