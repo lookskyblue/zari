@@ -40,8 +40,10 @@ const ShowStoreList = ({ userObj, location }) => {
             setStoreList(storeArray);
         });
     }, []);
-    
+
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("userInfo2");
+    localStorage.removeItem("storeMenu");
 
     storeList.map((obj) => {
 

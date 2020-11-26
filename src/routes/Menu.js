@@ -11,6 +11,18 @@ import MenuLoad from "./MenuLoad";
 const Menu = (storeObj) => {
     const [isClicked, setIsClicked] = useState(false);
 
+    if (!localStorage.getItem("storeMenu")) {
+        localStorage.setItem(
+            "storeMenu",
+            JSON.stringify({
+                storeObj: storeObj,
+            }),
+        )
+    }
+    else {
+        storeObj = JSON.parse(localStorage.getItem("storeMenu")).storeObj;
+    }
+
     const SpreadMenuAdd = () => {
         setIsClicked(!isClicked);
     }

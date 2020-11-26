@@ -12,47 +12,26 @@ import Menu from "./Menu";
 import { uObj } from "../components/App";
 
 const StoreDetail = (storeObj, isNear) => {
-
-    /*
-    const refesh = () => {
-        const [location, setLocation] = storeObj.location;
-        //로컬 스토리지에 저장해서 새로고침해도 상관없도록!
-        if (location.state !== undefined) {
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                    location: location,
-                    history: storeObj.history
-                })
-            );
-        }
-    }
-    refesh();
-    */
-
-    if (storeObj !== undefined) {
+    if (!localStorage.getItem("userInfo2")) {
         localStorage.setItem(
             "userInfo2",
             JSON.stringify({
-                location: storeObj.location
+                location: storeObj.location,
             }),
-
-        );
-    } else {
-        setting();
-    }
+        )
+    };
 
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
     const [isClicked, setIsClicked] = useState(false);
-    const [ownerId, setOwnerId] = useState(storeObj.location.state.storeObj.id);
-    const [storeName, setStoreName] = useState(storeObj.location.state.storeObj.storeName);
-    const [storeIntro, setStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
-    const [storeTime, setStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
+    const [ownerId, setOwnerId] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.id);
+    const [storeName, setStoreName] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeName);
+    const [storeIntro, setStoreIntro] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeIntro);
+    const [storeTime, setStoreTime] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeTime);
 
     const [editing, setEditing] = useState(false);
-    const [newStoreName, setNewStoreName] = useState(storeObj.location.state.storeObj.storeName);
-    const [newStoreIntro, setNewStoreIntro] = useState(storeObj.location.state.storeObj.storeIntro);
-    const [newStoreTime, setNewStoreTime] = useState(storeObj.location.state.storeObj.storeTime);
+    const [newStoreName, setNewStoreName] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeName);
+    const [newStoreIntro, setNewStoreIntro] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeIntro);
+    const [newStoreTime, setNewStoreTime] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeTime);
 
     const toggleEditing = () => setEditing((prev) => !prev);
     const onSubmit = async (event) => {
@@ -65,15 +44,15 @@ const StoreDetail = (storeObj, isNear) => {
         setEditing(false);
     }
     const onChange1 = (event) => {
-        const {target: {value}} = event;
+        const { target: { value } } = event;
         setNewStoreName(value);
     }
     const onChange2 = (event) => {
-        const {target: {value}} = event;
+        const { target: { value } } = event;
         setNewStoreIntro(value);
     }
     const onChange3 = (event) => {
-        const {target: {value}} = event;
+        const { target: { value } } = event;
         setNewStoreTime(value);
     }
 
@@ -84,29 +63,6 @@ const StoreDetail = (storeObj, isNear) => {
         setStoreIntro(loadLocalStorage.location.state.storeObj.storeIntro)
         setStoreTime(loadLocalStorage.location.state.storeObj.storeTime)
     }
-
-    //console.log(storeObj);
-
-    /*
-   if (storeObj !== undefined) {
-    localStorage.setItem(
-        "userInfo2",
-        JSON.stringify({
-            location: storeObj.location
-        }),
-        
-    );
-    setOwnerId(storeObj.location.state.storeObj.id);
-    setStoreName(storeObj.location.state.storeObj.storeName);
-    setStoreIntro(storeObj.location.state.storeObj.storeIntro);
-    setStoreTime(storeObj.location.state.storeObj.storeTime);
-    console.log(storeName);//여기까지는 넣어지고
-    } else {
-        setting();
-    }
-
-    console.log(localStorage.getItem("userInfo2"));
-*/
 
     const SpreadReview = () => {  // 토글
         setIsClicked(!isClicked);
@@ -124,9 +80,6 @@ const StoreDetail = (storeObj, isNear) => {
         });
     }, []);
 
-    console.log(uObj.uid);
-    console.log(storeObj.location.state.storeObj.UID);
-
     return (
         <div>
             {
@@ -141,7 +94,7 @@ const StoreDetail = (storeObj, isNear) => {
                         <button onClick={toggleEditing}>취소</button>
                     </> :
                     <>
-                        {uObj.uid=== storeObj.location.state.storeObj.UID && <button onClick={toggleEditing}>매장 정보 수정</button>}
+                        {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button onClick={toggleEditing}>매장 정보 수정</button>}
                         <ul className="storeDetail">
                             <li className="storeDetail__Logo">
                                 매장 로고 : 로고 이미지
