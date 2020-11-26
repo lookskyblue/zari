@@ -30,8 +30,6 @@ const Menu = (storeObj) => {
 
     const selectedStoreID = storeObj.location.state.storeObj;  // selectedStoreID는 내가 선택한 매장의 storeID
 
-    console.log(storeObj);
-
     return (
         <div>
             <div>

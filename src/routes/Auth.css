@@ -205,10 +205,16 @@ footer{
     width: 100%;
     padding: 20px 100px;
     border-bottom : solid 1px lightgray;
+    align-items: center;
 }
 
-.menu__obj > .menu__img {
+.menu__obj > .menu__imgContainer {
     width: 70%;
+}
+
+.menu__img {
+    width: 380px;
+    height: 250px;
 }
 
 .menu__obj > .menu__info {

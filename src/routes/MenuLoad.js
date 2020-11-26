@@ -7,8 +7,8 @@ const MenuLoad = ({ menus, isStore }) => {
         <div className="menu__container">
             {isStore && (
                 <div className="menu__obj">
-                    <div className="menu__img">
-                        메뉴 이미지: {menus.Image}
+                    <div className="menu__imgContainer">
+                        {menus.attachmentUrl && <img className="menu__img" src={menus.attachmentUrl} />}
                     </div>
                     <div className="menu__info">
                         <h3>
