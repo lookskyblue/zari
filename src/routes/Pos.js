@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { dbService } from "fbase";
 
 const Pos = (storeObj) => {
-    const location = storeObj.location;
+    //const location = storeObj.location;
 
     if (!localStorage.getItem("userInfo")) {
         localStorage.setItem(
@@ -59,7 +59,7 @@ const Pos = (storeObj) => {
         <div>
             <ul className="Pos">
                 <li className="Pos__Name">
-                    매장 이름: {location.state.storeObj.storeName}
+                    매장 이름: {storeObj.location.state.storeObj.storeName}
                 </li>
                 <li className="Pos__TableCnt">
                     테이블 수  :
@@ -73,7 +73,7 @@ const Pos = (storeObj) => {
                     {
                         pathname: "/EditTable",
                         state: {
-                            storeObj: location.state.storeObj.id
+                            storeObj: storeObj.location.state.storeObj.id
                         }
                     }
                 }>

@@ -7,6 +7,22 @@ import { v4 as uuidv4 } from "uuid";    // 랜덤 숫자 생성
 
 const Home = ({ userObj, location }) => {
 
+    if (!localStorage.getItem("Home")) {
+        localStorage.setItem(
+            "Home",
+            JSON.stringify({
+                userObj: userObj,
+                location: location
+            })
+        );
+    }
+
+    if (localStorage.getItem("Home")) {
+        userObj = JSON.parse(localStorage.getItem("Home")).userObj;
+        location = JSON.parse(localStorage.getItem("Home")).location;
+    }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
+
+
     //const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");

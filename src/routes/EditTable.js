@@ -4,8 +4,17 @@ import AddOrder from "./AddOrder";
 import { Link } from "react-router-dom";
 
 const EditTable = (storeObj) => {
+    if (!localStorage.getItem("EditTable")) {
+        localStorage.setItem(
+            "EditTable",
+            JSON.stringify({
+                location: storeObj.location,
+                history: storeObj.history
+            })
+        );
+    }
     const [tableArray, setTableArray] = useState([]);
-    const selectedStoreID = storeObj.location.state.storeObj;
+    const [selectedStoreID,setselectedStoreI] = useState(JSON.parse(localStorage.getItem("EditTable")).location.state.storeObj);
     const [idList, setIdList] = useState([]); // Tables 컬렉션의 모든 문서 값들
     const hello = "HELLO"
 
