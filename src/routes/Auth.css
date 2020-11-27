@@ -170,10 +170,10 @@ footer{
 .storeDetail__Btn > button {
     border:none;
     height: 50px;
-    width: 100px;
+    width: 500px;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 20px;
+    border-radius: 7px;
     background-color: #ffccbc;
     color: black;
 }
@@ -228,4 +228,62 @@ footer{
     display: flex;
     flex-direction: column;
     width: 30%;
+}
+
+.review__container {
+    padding: 0 421px;
+}
+
+.review__obj {
+    padding: 5px 0;
+}
+
+.review__obj > a {
+    color: #333;
+}
+
+.review__form {
+    margin: 5px 0px;
+    width: 500px;
+}
+
+.Pos {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    border-bottom : solid 1px lightgray;
+}
+
+.Pos__Name, .Pos__TableCnt, .Pos__Sales {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.Pos__Btn {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Pos__Btn button {
+    border:none;
+    width: 300px;
+    height: 230px;
+    font-size: 50px;
+    font-weight: bold;
+    border-radius: 7px;
+    background-color: #ffccbc;
+}
+
+.Pos__Btn button:focus{
+    outline:0;
+}
+
+.Pos__Btn button:hover{
+    background-color:#ffddc1;
+    cursor:pointer;
+    box-shadow:0 0 4px #c97b63;
 }

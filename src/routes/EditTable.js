@@ -12,17 +12,6 @@ const EditTable = (storeObj) => {
     useEffect(() => {
         dbService.collection("Tables").where
             ("UniqueStoreId", "==", selectedStoreID).onSnapshot(snapshot => {
-
-                const id = snapshot.docs.map(doc => (   // 테이블 문서값을 필드에 셋
-                    dbService.collection("Tables").doc(doc.id).set({
-                        UniqueTableNo: doc.id
-                    }, { merge: true }),
-
-                    { // Tables 컬렉션의 문서 값만 추출
-                        id: doc.id
-                    }));
-                setIdList(id);
-
                 const tableArray = snapshot.docs.map(doc => ({// Tables값 전체 가져오기
 
                     id: doc.id,
@@ -75,7 +64,7 @@ const EditTable = (storeObj) => {
                                 pathname: "/AddOrder",
                                 state: {
                                     selectedStoreID,
-                                    obj
+                                    tableObj: obj
                                 }
                             }
                             }>

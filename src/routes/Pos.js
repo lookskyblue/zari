@@ -22,7 +22,7 @@ const Pos = (storeObj) => {
     const onDeleteClick = async () => { // DB에서 문서 삭제하는 function
         const ok = window.confirm("매장을 삭제하시겠습니까?");
         if (ok) {
-            //await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
+            await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
             await dbService.collection("review").where("ThisStoreId", "==", storeObj.location.state.storeObj.id)
                 .get()
                 .then(function (querySnapshot) {
@@ -56,28 +56,41 @@ const Pos = (storeObj) => {
 
     return (
         <div>
-            <ul>
-                <li>
-                    가게 이름: {location.state.storeObj.storeName}
+            <ul className="Pos">
+                <li className="Pos__Name">
+                    매장 이름: {location.state.storeObj.storeName}
                 </li>
-                <li>
+                <li className="Pos__TableCnt">
                     테이블 수  :
                 </li>
-                <li>
-                    정산할 돈 :
+                <li className="Pos__Sales">
+                    금일 매출 :
                 </li>
+            </ul>
+            <div className="Pos__Btn">
                 <Link to={
                     {
-                        pathname: "/PosEdit",
+                        pathname: "/EditTable",
                         state: {
-                            storeObj: location
+                            storeObj: location.state.storeObj.id
                         }
                     }
                 }>
-                    <button>테이블 관리</button>
+                    <button className="tableManage">테이블 관리</button>
                 </Link>
-                <button onClick={onDeleteClick}>매장 삭제</button>
-            </ul>
+                <button className="storeDelete" onClick={onDeleteClick}>매장 삭제</button>
+                <button className="settleMoney">매출 정산</button>
+                <Link to={
+                    {
+                        pathname: "/Menu",
+                        state: {
+                            storeObj: storeObj.location.state.storeObj.id
+                        }
+                    }
+                }>
+                    <button>가게 메뉴</button>
+                </Link>
+            </div>
         </div>
     );
 }

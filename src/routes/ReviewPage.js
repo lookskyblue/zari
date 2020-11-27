@@ -3,7 +3,7 @@ import { authService, dbService } from "fbase"
 import Reviews from "components/Reviews"
 
 
-const ReviewPage = ({ storeName, ownerId }) => {
+const ReviewPage = ({storeObj}) => {
     const [myComment, setMyComment] = useState("");
     const myEmail = authService.currentUser.email;
 
@@ -12,14 +12,14 @@ const ReviewPage = ({ storeName, ownerId }) => {
         await dbService.collection("review").add({
             UserEmail: myEmail,
             UserComment: myComment,
-            ThisStoreName: storeName,
-            ThisStoreId: ownerId
+            ThisStoreId: storeObj.location.state.storeObj.id
         });
         setMyComment("");
     };
 
     const [reviewList, setReviewList] = useState([]);
 
+    
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
 
         dbService.collection("review").onSnapshot(snapshot => {
@@ -30,7 +30,7 @@ const ReviewPage = ({ storeName, ownerId }) => {
             setReviewList(reviewArray);
         });
     }, []);
-
+    
     const onChange = (event) => {
         const { target: { value } } = event;
         setMyComment(value);
@@ -38,11 +38,11 @@ const ReviewPage = ({ storeName, ownerId }) => {
 
     return (
         <div>
-            <div>
+            <div className="review__container">
                 {reviewList.map((obj) => (
-                    <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreId === ownerId} />
+                    <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreId === storeObj.location.state.storeObj.id} />
                 ))}
-                <form onSubmit={onSubmit}>
+                <form className="review__form" onSubmit={onSubmit}>
                     <input value={myComment} onChange={onChange} type="text" placeholder="리뷰를 남겨보세요." maxLength={50} />
                     <input type="submit" value="댓글 달기" />
                 </form>
@@ -52,4 +52,3 @@ const ReviewPage = ({ storeName, ownerId }) => {
 }
 
 export default ReviewPage
-export let test2;

@@ -5,7 +5,7 @@ import React, { Component } from "react";
 const Reviews = ({ reviews, isStore }) => {
 
     return (
-        <div>
+        <div className="review__obj">
             <Link
                 to={{
                     pathname: "/",
@@ -16,7 +16,9 @@ const Reviews = ({ reviews, isStore }) => {
             >
                 {isStore && (
                     <h3>
-                        {reviews.UserEmail}: {reviews.UserComment}
+                        {reviews.UserEmail}
+                        <br></br>
+                        {reviews.UserComment}
                     </h3>
                 )}
 

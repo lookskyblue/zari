@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import MenuLoad from "./MenuLoad";
 import Menu from "./Menu";
 import { uObj } from "../components/App";
+import ShowStoreList from "./ShowStoreList";
 
 const StoreDetail = (storeObj, isNear) => {
     if (!localStorage.getItem("userInfo2")) {
@@ -20,7 +21,6 @@ const StoreDetail = (storeObj, isNear) => {
             }),
         )
     };
-
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [ownerId, setOwnerId] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.id);
@@ -119,7 +119,7 @@ const StoreDetail = (storeObj, isNear) => {
                             <button onClick={SpreadReview} >리뷰</button>
                         </div>
                         <div>
-                            {isClicked ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
+                            {isClicked ? <ReviewPage storeObj={storeObj} /> : ""}
                         </div>
                     </>
             }
