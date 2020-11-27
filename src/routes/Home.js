@@ -41,6 +41,7 @@ const Home = ({ userObj, location }) => {
         let attachmentUrl = "";
         if (attachment != "") {
             const attachmentfileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+            // 매장 등록에 사용한 이미지는 Storage에 user id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
         }

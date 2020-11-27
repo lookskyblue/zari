@@ -22,8 +22,34 @@ const Pos = (storeObj) => {
     const onDeleteClick = async () => { // DB에서 문서 삭제하는 function
         const ok = window.confirm("매장을 삭제하시겠습니까?");
         if (ok) {
-            await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
-            
+            //await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
+            await dbService.collection("review").where("ThisStoreId", "==", storeObj.location.state.storeObj.id)
+                .get()
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        dbService.doc(`review/${doc.id}`).delete(); // 매장 id와 일치하는 리뷰들 모두 삭제
+                    });
+                })
+                .catch(function (error) {
+                });
+            await dbService.collection("menu").where("StoreID", "==", storeObj.location.state.storeObj.id)
+                .get()
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        dbService.doc(`menu/${doc.id}`).delete(); // 매장 id와 일치하는 메뉴들 모두 삭제
+                    });
+                })
+                .catch(function (error) {
+                });
+            await dbService.collection("Tables").where("UniqueStoreId", "==", storeObj.location.state.storeObj.id)
+                .get()
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        dbService.doc(`Tables/${doc.id}`).delete(); // 매장 id와 일치하는 테이블들 모두 삭제
+                    });
+                })
+                .catch(function (error) {
+                });
             // 매장 고유 번호와 일치하는 리뷰, 메뉴, 테이블, 등등 다 삭제 할 것
         }
     }

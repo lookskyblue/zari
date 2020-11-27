@@ -12,6 +12,7 @@ const MenuAdd = ({ storeObj }) => {
         let attachmentUrl = "";
         if (attachment != "") {
             const attachmentfileRef = storageService.ref().child(`${storeObj}/${uuidv4()}`);
+            // 메뉴 추가에 사용한 이미지는 Storage에 store id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
         }
