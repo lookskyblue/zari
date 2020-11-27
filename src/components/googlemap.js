@@ -6,11 +6,12 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 class MapAPI extends Component {
 
   state = {
+    mapMarker: null,
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
   };
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker,e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -20,11 +21,14 @@ class MapAPI extends Component {
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
+        mapMarker:null,
         showingInfoWindow: false,
         activeMarker: null
       })
     }
   };
+
+  
 
   render() {
     const mapStyles = {
@@ -44,6 +48,20 @@ class MapAPI extends Component {
           style={mapStyles}
         >
 
+<<<<<<< HEAD
+          <Marker onClick={this.onMarkerClick} name={"현재위치"} position={this.props.initialCenter}>
+          </Marker>
+
+          {storeArray !==0 && storeArray.map((obj) => (
+                <Marker key={obj.id} name={obj.storeName} title={'근처매장'} 
+                position={{lat:obj.location.latitude, lng:obj.location.longitude}} icon={{
+                  url: "http://maps.google.com/mapfiles/ms/icons/blue.png"
+                  
+                }} onClick={this.onMarkerClick}>
+                  
+                </Marker>
+            ))}
+=======
           <Marker onClick={this.onMarkerClick} name={"현재위치"} >
             <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
               <div>
@@ -60,6 +78,20 @@ class MapAPI extends Component {
 
             </Marker>
           ))}
+>>>>>>> e9ec349b21ad6f693bd9d041b6b637913a2518cd
+
+          {this.state.selectedPlace && (
+            <InfoWindow
+              position={
+                this.state.selectedPlace.position
+              }
+              visible={this.state.showingInfoWindow}
+              >
+                <div>
+                <h1>{this.state.selectedPlace.name}</h1>
+              </div>
+              </InfoWindow>
+          )}
 
           {/* <Marker
             onClick={this.onMarkerClick} name={"매장위치"}
