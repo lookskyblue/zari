@@ -10,6 +10,8 @@ import StoreDetail from "../routes/StoreDetail"
 import Pos from "../routes/Pos"
 import PosEdit from "../routes/PosEdit"
 import Menu from "../routes/Menu"
+import EditTable from "../routes/EditTable";
+import AddOrder from "../routes/AddOrder";
 
 const AppRouter = ({ isLoggedIn, userObj, location }) => {
   return (
@@ -37,8 +39,11 @@ const AppRouter = ({ isLoggedIn, userObj, location }) => {
             <Route exact path="/Pos" component={Pos} />
             <Route exact path="/PosEdit" component={PosEdit} />
             <Route exact path="/Menu" component={Menu} />
+            <Route exact path="/AddOrder" component={AddOrder} />
 
-            <Navigation />
+            <Route exact path="/EditTable" component={EditTable} />
+            
+            <Navigation/>
           </>
 
         ) : (

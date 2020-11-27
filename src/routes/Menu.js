@@ -41,6 +41,8 @@ const Menu = (storeObj) => {
     }, []);
 
     const selectedStoreID = storeObj.location.state.storeObj;  // selectedStoreID는 내가 선택한 매장의 storeID
+    console.log("Menu.js 1: " + selectedStoreID) // 값 정상
+    console.log("Menu.js 2: " + storeObj); // 이싱하게 나옴 
 
     return (
         <div>

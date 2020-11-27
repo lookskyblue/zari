@@ -23,6 +23,8 @@ const Pos = (storeObj) => {
         const ok = window.confirm("매장을 삭제하시겠습니까?");
         if (ok) {
             await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
+            
+            // 매장 고유 번호와 일치하는 리뷰, 메뉴, 테이블, 등등 다 삭제 할 것
         }
     }
 
