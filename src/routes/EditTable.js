@@ -7,7 +7,7 @@ const EditTable = (storeObj) => {
     const [tableArray, setTableArray]  = useState([]);
     const selectedStoreID = storeObj.location.state.storeObj;
     const [idList, setIdList] = useState([]); // Tables 컬렉션의 모든 문서 값들
-
+    const hello = "HELLO"
 
     useEffect(() => {
         dbService.collection("Tables").where
@@ -55,7 +55,6 @@ const EditTable = (storeObj) => {
         dbService.collection("Tables").doc(value).delete()
     }
     console.log(selectedStoreID);
-    const test = 3
     return(
         <div>
             <div>
@@ -69,11 +68,12 @@ const EditTable = (storeObj) => {
                 {tableArray.map((obj) => (
                         <div> 
                             <div>
+                                {console.log(obj)}
                                 <Link to = {{
                                     pathname:"/AddOrder",
                                     state: {
                                         selectedStoreID,
-                                        test: 5
+                                        obj
                                     }}
                                 }>
                                 <button >테이블 고유 번호 = {obj.id}</button>

@@ -2,11 +2,9 @@ import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import MenuLoad from "./MenuLoad"
 
-const AddOrder = (StoreObj, test) => {
+const AddOrder = (StoreObj) => {
     const selectedStoreId = StoreObj.location.state.selectedStoreID
-    const te = test
-    console.log(te)
-    console.log(test)
+    const TableNo = StoreObj.location.state.obj.UniqueTableNo
 
     const [menuList, setMenuList] = useState([]);
 
@@ -25,7 +23,11 @@ const AddOrder = (StoreObj, test) => {
         event.preventDefault();
         const { target: { value } } = event;
         console.log(value)
-        
+        console.log(TableNo)
+
+         dbService.collection("Tables").doc(TableNo).set({
+             value: 1
+         }, {merge : true })
     }
 
     return(
