@@ -9,10 +9,22 @@ import { authService, dbService } from "fbase";
 import MenuLoad from "./MenuLoad";
 
 const Menu = (storeObj) => {
-    const [isLoading, setisLoading] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+
+    if (!localStorage.getItem("storeMenu")) {
+        localStorage.setItem(
+            "storeMenu",
+            JSON.stringify({
+                storeObj: storeObj,
+            }),
+        )
+    }
+    else {
+        storeObj = JSON.parse(localStorage.getItem("storeMenu")).storeObj;
+    }
 
     const SpreadMenuAdd = () => {
-        setisLoading(!isLoading);
+        setIsClicked(!isClicked);
     }
 
     const [menuList, setMenuList] = useState([]);
@@ -30,24 +42,20 @@ const Menu = (storeObj) => {
 
     const selectedStoreID = storeObj.location.state.storeObj;  // selectedStoreID는 내가 선택한 매장의 storeID
 
-    console.log(storeObj);
-
     return (
         <div>
             <div>
-            {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
-                <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID===selectedStoreID}/>
-                 ))}
+                {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
+                    <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === selectedStoreID} />
+                ))}
             </div>
-            
+
             <button onClick={SpreadMenuAdd}>메뉴 추가</button>
             <div>
-                {isLoading ? <MenuAdd storeObj={selectedStoreID}/> : ""}
+                {isClicked ? <MenuAdd storeObj={selectedStoreID} /> : ""}
             </div>
         </div>
     );
-
-
 }
 
 export default Menu;

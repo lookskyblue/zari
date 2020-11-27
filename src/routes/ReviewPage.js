@@ -13,7 +13,7 @@ const ReviewPage = ({ storeName, ownerId }) => {
             UserEmail: myEmail,
             UserComment: myComment,
             ThisStoreName: storeName,
-            ThisStoreOwnerId: ownerId
+            ThisStoreId: ownerId
         });
         setMyComment("");
     };
@@ -40,18 +40,15 @@ const ReviewPage = ({ storeName, ownerId }) => {
         <div>
             <div>
                 {reviewList.map((obj) => (
-                    <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreOwnerId === ownerId} />
+                    <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreId === ownerId} />
                 ))}
-
                 <form onSubmit={onSubmit}>
                     <input value={myComment} onChange={onChange} type="text" placeholder="리뷰를 남겨보세요." maxLength={50} />
                     <input type="submit" value="댓글 달기" />
                 </form>
             </div>
-
         </div>
     );
-
 }
 
 export default ReviewPage
