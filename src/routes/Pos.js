@@ -5,7 +5,7 @@ import { dbService } from "fbase";
 const Pos = (storeObj) => {
     const location = storeObj.location;
 
-    if (location.state !== undefined) {
+    if (!localStorage.getItem("userInfo")) {
         localStorage.setItem(
             "userInfo",
             JSON.stringify({
@@ -18,6 +18,7 @@ const Pos = (storeObj) => {
     if (localStorage.getItem("userInfo")) {
         storeObj = JSON.parse(localStorage.getItem("userInfo"));
     }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
+
 
     const onDeleteClick = async () => { // DB에서 문서 삭제하는 function
         const ok = window.confirm("매장을 삭제하시겠습니까?");
