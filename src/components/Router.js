@@ -26,9 +26,7 @@ const AppRouter = ({ isLoggedIn, userObj, location }) => {
               <ShowStoreList userObj={userObj} location={location} />
             </Route>
 
-            <Route exact path="/Profile">
-              <Profile />
-            </Route>
+            <Route exact path="/Profile" component={Profile} />
 
             <Route exact path="/Home">
               <Home userObj={userObj} location={location} />
