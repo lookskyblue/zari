@@ -4,6 +4,9 @@ import AddOrder from "./AddOrder";
 import { Link } from "react-router-dom";
 
 const EditTable = (storeObj) => {
+
+    const [orderArray, setOrderArray] = useState([])
+
     if (!localStorage.getItem("EditTable")) {
         localStorage.setItem(
             "EditTable",
@@ -41,8 +44,30 @@ const EditTable = (storeObj) => {
 
     const AddTable = async (event) => {
         event.preventDefault();
-        await dbService.collection("Tables").add({
+        
+
+        dbService.collection("menu").where
+        ("StoreID", "==", selectedStoreID).onSnapshot(snapshot => {
+            const orderArray = snapshot.docs.map(doc => {
+                return(
+                    {
+                        menuName: doc.data().Name,
+                        orderQuantity: 0,
+                        singlePrice: doc.data().Price,
+                        totalPrice: 0 // orderQuantity * singlePrice
+                    }
+                );
+            })
+            setOrderArray(orderArray)
+        })
+
+        console.log("메뉴 객체배열 나와야함..")
+        console.log(orderArray)
+
+        dbService.collection("Tables").add({
             UniqueStoreId: selectedStoreID,
+            TotalPrice: 0,
+            OrderArray: orderArray
         });
 
     }
