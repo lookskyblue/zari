@@ -473,7 +473,7 @@ footer{
     display: flex;
 }
 
-.pf > button {
+.logout {
     border:none;
     width: 80px;
     height: 30px;
@@ -481,11 +481,11 @@ footer{
     background-color: #ffccbc;
 }
 
-.pf > button:focus{
+.logout:focus{
     outline:0;
 }
 
-.pf button:hover{
+.logout:hover{
     background-color:#ffddc1;
     cursor:pointer;
     box-shadow:0 0 4px #c97b63;

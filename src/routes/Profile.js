@@ -18,11 +18,11 @@ export default () => {
 
     useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다
         dbService.collection("storeinfo").where("UID", "==", uObj.uid).onSnapshot(snapshot => {
-            const reviewArray = snapshot.docs.map(doc => ({
+            const myStoreArray = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            setMyStoreList(reviewArray);
+            setMyStoreList(myStoreArray);
         });
     }, []);
 
@@ -36,7 +36,7 @@ export default () => {
                     ))}
                 </div>
             </div>
-            <button onClick={onLogoutClick}>Log Out</button>
+            <button className="logout" onClick={onLogoutClick}>Log Out</button>
         </div>
     );
 };
