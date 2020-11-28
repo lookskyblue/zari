@@ -55,7 +55,7 @@ const Home = ({ userObj, location }) => {
     const onSubmit = async (event) => {
         event.preventDefault();
         let attachmentUrl = "";
-        if (attachment != "") {
+        if (attachment !== "") {
             const attachmentfileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
             // 매장 등록에 사용한 이미지는 Storage에 user id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
@@ -107,19 +107,24 @@ const Home = ({ userObj, location }) => {
     const onClearAttachment = () => setAttachment(null);
 
     return (
-        <div>
-            <form on onSubmit={onSubmit}>
-                <input type="file" accept="image/*" onChange={onFileChange} />
+        <div className="register__container">
+            <form className="register__form" on onSubmit={onSubmit}>
+                <div className="register__logo">
+                    <div className="register__text">매장 로고를 선택하세요.</div>
+                    <input type="file" accept="image/*" onChange={onFileChange} />
+                </div>
                 {attachment && (
                     <div>
                         <img src={attachment} />
                         <button onClick={onClearAttachment}>취소</button>
                     </div>)
                 }
-                <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20} required />
-                <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200} required />
-                <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200} required />
-                <input type="submit" value="등록" />
+                <div className="register__input">
+                    <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20} required />
+                    <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200} required />
+                    <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200} required />
+                    <input type="submit" value="등록" />
+                </div>
             </form>
         </div>
     );//css수정필요

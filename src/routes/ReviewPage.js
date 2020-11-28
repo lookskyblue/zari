@@ -37,7 +37,7 @@ const ReviewPage = ({storeObj}) => {
     }
 
     return (
-        <div>
+        <div className="review">
             <div className="review__container">
                 {reviewList.map((obj) => (
                     <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreId === storeObj.location.state.storeObj.id} />

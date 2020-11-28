@@ -144,6 +144,38 @@ footer{
     font-weight: bold;
 }
 
+.register__container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.register__form {
+    width: 510px;
+    height: 210px;
+}
+
+.register__logo {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.register__logo > div {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.register__input {
+    display: flex;
+    flex-direction: column;
+}
+
+.register__input > input {
+    height: 40px;
+    margin: 5px 0;
+}
+
 .storeDetail {
     display: flex;
     flex-direction: column;
@@ -201,6 +233,10 @@ footer{
     font-weight: bold;
 }
 
+.storeDetail__menu > .menu__container > .menu__obj > .menu__delBtn {
+    display: none;
+}
+
 .menu__container {
     display: flex;
     justify-content: center;
@@ -210,13 +246,13 @@ footer{
 .menu__obj {
     display: flex;
     width: 100%;
-    padding: 20px 100px;
+    padding: 20px 70px;
     border-bottom : solid 1px lightgray;
     align-items: center;
 }
 
 .menu__obj > .menu__imgContainer {
-    width: 70%;
+    width: 68%;
 }
 
 .menu__img {
@@ -227,11 +263,38 @@ footer{
 .menu__obj > .menu__info {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 25%;
+}
+
+.menu__obj > .menu__delBtn {
+    border:none;
+    width: 7%;
+    height: 50px;
+    width: 70px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 7px;
+    background-color: #ffccbc;
+    color: black;
+}
+
+.menu__delBtn:focus{
+    outline:0;
+}
+
+.menu__delBtn:hover{
+    background-color:#ffddc1;
+    cursor:pointer;
+    box-shadow:0 0 4px #c97b63;
+}
+
+.review {
+    display: flex;
+    justify-content: center;
 }
 
 .review__container {
-    padding: 0 421px;
+    width: 510px;
 }
 
 .review__obj {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 
 const Pos = (storeObj) => {
     //const location = storeObj.location;
@@ -24,6 +24,7 @@ const Pos = (storeObj) => {
         const ok = window.confirm("매장을 삭제하시겠습니까?");
         if (ok) {
             await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
+            await storageService.refFromURL(storeObj.location.state.storeObj.attachmentUrl).delete();
             await dbService.collection("review").where("ThisStoreId", "==", storeObj.location.state.storeObj.id)
                 .get()
                 .then(function (querySnapshot) {
@@ -38,6 +39,7 @@ const Pos = (storeObj) => {
                 .then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
                         dbService.doc(`menu/${doc.id}`).delete(); // 매장 id와 일치하는 메뉴들 모두 삭제
+                        storageService.refFromURL(doc.data().attachmentUrl).delete();
                     });
                 })
                 .catch(function (error) {

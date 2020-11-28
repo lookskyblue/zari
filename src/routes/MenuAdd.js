@@ -10,7 +10,7 @@ const MenuAdd = ({ storeObj }) => {
     const onSubmit = async (event) => {
         event.preventDefault();
         let attachmentUrl = "";
-        if (attachment != "") {
+        if (attachment !== "") {
             const attachmentfileRef = storageService.ref().child(`${storeObj}/${uuidv4()}`);
             // 메뉴 추가에 사용한 이미지는 Storage에 store id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
@@ -57,6 +57,7 @@ const MenuAdd = ({ storeObj }) => {
     return (
         <div>
             <form onSubmit={onSubmit}>
+                <div>메뉴 사진을 선택하세요.</div>
                 <input type="file" accept="image/*" onChange={onFileChange} required />
                 {attachment && (
                     <div>
