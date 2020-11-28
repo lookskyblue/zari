@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { authService, dbService, storageService } from "fbase"
 import { v4 as uuidv4 } from "uuid";
 
@@ -6,8 +6,40 @@ const MenuAdd = ({ storeObj }) => {
     const [MenuName, setMenuName] = useState("");
     const [MenuPrice, setMenuPrice] = useState("");
     const [attachment, setAttachment] = useState();
+    const [menuArray, setMenuArray] = useState([]);
+    const [tableArray, setTableArray] = useState([]);
+
+    useEffect(() => {
+        dbService.collection("menu").where
+        ("StoreID", "==", storeObj).onSnapshot(snapshot => {
+            const MenuArray = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setMenuArray(MenuArray);
+        });
+
+        dbService.collection("Tables")
+        .where("UniqueStoreId", "==", storeObj).onSnapshot(snapshot => {
+            const TablesArray = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setTableArray(TablesArray)
+        })
+    }, []);
+
+    console.log(tableArray)
 
     const onSubmit = async (event) => {
+
+        for(var i = 0; i < menuArray.length; i++) {
+            if(menuArray[i].Name==MenuName) {
+                alert("이미 똑같은 이름의 메뉴가 있습니다.")
+                return
+            }
+        }
+
         event.preventDefault();
         let attachmentUrl = "";
         if (attachment !== "") {
@@ -23,7 +55,22 @@ const MenuAdd = ({ storeObj }) => {
             StoreID: storeObj
         }
 
+        const addMenuOnTable = {    //현재 개설된 테이블에 메뉴 정보 반영을 위한 변수
+            menuName: MenuName,
+            orderQuantity: 0,
+            singlePrice: MenuPrice*1,
+            totalPrice: 0
+        }
+
+        for(var i = 0; i < tableArray.length; i++) {    //테이블 돌면서 메뉴 추가 반영
+            tableArray[i].OrderArray.push(addMenuOnTable)
+            dbService.collection("Tables").doc(tableArray[i].id).set({
+                OrderArray: tableArray[i].OrderArray
+            }, {merge: true})
+        }
+
         await dbService.collection("menu").add(menuObj);
+
         setAttachment("");
         setMenuName("");
         setMenuPrice("");
@@ -66,7 +113,7 @@ const MenuAdd = ({ storeObj }) => {
                     </div>)
                 }
                 <input value={MenuName} onChange={onChange2} type="text" placeholder="메뉴 이름" maxLength={50} required />
-                <input value={MenuPrice} onChange={onChange3} type="text" placeholder="메뉴 가격" maxLength={50} required />
+                <input value={MenuPrice} onChange={onChange3} type="number" placeholder="메뉴 가격" maxLength={50} required />
                 <input type="submit" value="메뉴 추가" />
             </form>
         </div>

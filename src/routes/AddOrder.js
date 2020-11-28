@@ -1,21 +1,22 @@
 import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import MenuLoad from "./MenuLoad"
-import OrderInfo from "./OrderInfo";
 
+var tp = 0
 const AddOrder = (StoreObj) => {
     const selectedStoreId = StoreObj.location.state.selectedStoreID
     const TableNo = StoreObj.location.state.tableObj.id
 
     const [menuList, setMenuList] = useState([]);
     const [orderList, setOrderList] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(999);
     const [refresh, setRefresh] = useState(0);
 
     useEffect(() => {
          dbService.collection("Tables").doc(TableNo).onSnapshot(function(doc) {
              setOrderList(doc.data().OrderArray)
-             setTotalPrice(doc.data().TotalPrice)
+             console.log("유즈팩트 토탈머니")
+             console.log(doc.data().TotalPrice)
+             tp = doc.data().TotalPrice
          })
 
         dbService.collection("menu").where
@@ -31,52 +32,70 @@ const AddOrder = (StoreObj) => {
     const SaveOrder = () => {
 
         console.log("SaveOrder")
+        console.log(tp)
 
         dbService.collection("Tables").doc(TableNo).set({
-            TotalPrice: totalPrice,
+            TotalPrice: tp,
             OrderArray: orderList
             }, {merge : true })
-            
             setRefresh(1)
     }
 
     const MinusOrder = (event) => {
         event.preventDefault();
         const { target: { value } } = event;
+        var test = 0
 
         for(var i = 0; i < orderList.length; i++) {
             if(orderList[i].menuName == value)
             {
+                if(0 > orderList[i].totalPrice - orderList[i].singlePrice)
+                {
+                    alert("0원 이하입니다.")
+                    return;
+                }
                 orderList[i].orderQuantity -= 1
-                orderList[i].totalPrice = 
-                orderList[i].singlePrice * 
-                orderList[i].orderQuantity
-                setTotalPrice(totalPrice + orderList[i].totalPrice)
+                orderList[i].totalPrice -= orderList[i].singlePrice
+                tp = tp-orderList[i].singlePrice
                 SaveOrder()
                 break
             }
         }
     }
-     
     
-    const AddOrder = (event) => {
+    const AddOrder = (event) => { 
         event.preventDefault();
         const { target: { value } } = event;
 
         for(var i = 0; i < orderList.length; i++) {
             if(orderList[i].menuName == value)
             {
+                
                 orderList[i].orderQuantity += 1
-                orderList[i].totalPrice = 
-                orderList[i].singlePrice * 
-                orderList[i].orderQuantity
-                setTotalPrice(totalPrice + orderList[i].totalPrice)
-                console.log(totalPrice)
+                orderList[i].totalPrice += orderList[i].singlePrice 
+                tp = tp+orderList[i].singlePrice
+
                 SaveOrder()
                 break
             }
         }
     }
+
+    const Calculate = () => {
+
+        for(var i = 0; i < orderList.length; i++) {
+                orderList[i].orderQuantity = 0
+                orderList[i].totalPrice = 0
+        }
+        tp = 0
+        
+        dbService.collection("Tables").doc(TableNo).set({
+            TotalPrice: tp,
+            OrderArray: orderList
+            }, {merge : true })
+            setRefresh(1)
+    }
+
     
     const ShowOrderInfo = (menuName) => { // 배열객체 포문 돌려서 메뉴이름 일치하는 인덱스의 수량 리턴해 
        for(var i = 0; i < orderList.length; i++) {
@@ -92,7 +111,7 @@ const AddOrder = (StoreObj) => {
                             현재 메뉴 가격: {orderList[i].totalPrice}
                         </li>
                         <li>
-                            총 가격: {totalPrice}
+                            현제 테이블 총 주문 금액: {tp}
                         </li>
                     </ul>
                 </div>
@@ -104,7 +123,7 @@ const AddOrder = (StoreObj) => {
     return(
         <div>
             <div>
-                현재 테이블 총 주문 금액: {totalPrice}
+                현재 테이블 총 주문 금액: {tp}
             </div>
             <div>
             { menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
@@ -123,11 +142,11 @@ const AddOrder = (StoreObj) => {
                             </h3>
 
                             <div>
-                                <button onClick={AddOrder} value={obj.Name}>+</button>
-                                <button onClick={MinusOrder} value={obj.Name}>-</button>
+                                <button onClick={AddOrder} value={obj.Name}>+1</button>
+                                <button onClick={MinusOrder} value={obj.Name}>-1</button>
+                                <button onClick={Calculate} value={obj.Name}>계산하기</button>
                                     {
                                         ShowOrderInfo(obj.Name)
-                                        //< OrderInfo obj={obj} TableNo={TableNo} />
                                     }
                             </div>
                         </div>

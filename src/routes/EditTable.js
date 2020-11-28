@@ -19,9 +19,26 @@ const EditTable = (storeObj) => {
     const [tableArray, setTableArray] = useState([]);
     const [selectedStoreID,setselectedStoreI] = useState(JSON.parse(localStorage.getItem("EditTable")).location.state.storeObj);
     const [idList, setIdList] = useState([]); // Tables 컬렉션의 모든 문서 값들
-    const hello = "HELLO"
 
     useEffect(() => {
+
+        dbService.collection("menu").where
+        ("StoreID", "==", selectedStoreID).onSnapshot(snapshot => {
+            const orderArray = snapshot.docs.map(doc => {
+                return(
+                    {
+                        menuName: doc.data().Name,
+                        orderQuantity: 0,
+                        singlePrice: (doc.data().Price*1), // 문자->숫자 형변환
+                        totalPrice: 0 // orderQuantity * singlePrice
+                    }
+                );
+            })
+            console.log("테이블 애드 함수")
+            console.log(orderArray)
+            setOrderArray(orderArray)
+        })
+
         dbService.collection("Tables").where
             ("UniqueStoreId", "==", selectedStoreID).onSnapshot(snapshot => {
                 const tableArray = snapshot.docs.map(doc => ({// Tables값 전체 가져오기
@@ -32,8 +49,7 @@ const EditTable = (storeObj) => {
                 setTableArray(tableArray);
 
             });
-    }, []
-    );
+    }, []);
 
     const checkLength = (event) => {
         event.preventDefault();
@@ -44,22 +60,6 @@ const EditTable = (storeObj) => {
 
     const AddTable = async (event) => {
         event.preventDefault();
-        
-
-        dbService.collection("menu").where
-        ("StoreID", "==", selectedStoreID).onSnapshot(snapshot => {
-            const orderArray = snapshot.docs.map(doc => {
-                return(
-                    {
-                        menuName: doc.data().Name,
-                        orderQuantity: 0,
-                        singlePrice: doc.data().Price,
-                        totalPrice: 0 // orderQuantity * singlePrice
-                    }
-                );
-            })
-            setOrderArray(orderArray)
-        })
 
         console.log("메뉴 객체배열 나와야함..")
         console.log(orderArray)
