@@ -94,20 +94,20 @@ const StoreDetail = (storeObj, isNear) => {
     }, []);
 
     return (
-        <div>
+        <div className="storeDetail__container">
             {
                 editing ?
                     <>
-                        <form onSubmit={onSubmit}>
+                        <form className="storeDetail__edit" onSubmit={onSubmit}>
                             <input type="text" placeholder="새로운 매장 이름" value={storeName} onChange={onChange1} required />
                             <input type="text" placeholder="새로운 매장 설명" value={storeIntro} onChange={onChange2} required />
                             <input type="text" placeholder="새로운 매장 영업 시간" value={storeTime} onChange={onChange3} required />
                             <input type="submit" value="수정" />
                         </form>
-                        <button onClick={toggleEditing}>취소</button>
+                        <button className="storeDetail__cancelBtn" onClick={toggleEditing}>취소</button>
                     </> :
                     <>
-                        {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button onClick={toggleEditing}>매장 정보 수정</button>}
+                        {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button className="storeDetail__introEdit" onClick={toggleEditing}>매장 정보 수정</button>}
                         <ul className="storeDetail">
                             <li className="storeDetail__Logo">
                                 매장 로고 : 로고 이미지

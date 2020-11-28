@@ -55,13 +55,13 @@ const MenuAdd = ({ storeObj }) => {
     const onClearAttachment = () => setAttachment(null);
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
+        <div className="menuAdd__container">
+            <form className="menuAdd_form" onSubmit={onSubmit}>
                 <div>메뉴 사진을 선택하세요.</div>
                 <input type="file" accept="image/*" onChange={onFileChange} required />
                 {attachment && (
                     <div>
-                        <img src={attachment} />
+                        <img className="menuAdd_img" src={attachment} />
                         <button onClick={onClearAttachment}>취소</button>
                     </div>)
                 }
