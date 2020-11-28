@@ -7,51 +7,18 @@ import { v4 as uuidv4 } from "uuid";    // 랜덤 숫자 생성
 
 const Home = ({ userObj, location }) => {
 
-    if (!localStorage.getItem("Home")) {
-        localStorage.setItem(
-            "Home",
-            JSON.stringify({
-                userObj: userObj,
-                location: location
-            })
-        );
-    }
-
-    if (localStorage.getItem("Home")) {
-        userObj = JSON.parse(localStorage.getItem("Home")).userObj;
-        location = JSON.parse(localStorage.getItem("Home")).location;
-    }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
-
-
-    //const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
     const [storeTime, setStoreTime] = useState("");
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState("");
 
     const [storeCollection, setStoreCollection] = useState([]);
 
     const history = useHistory();
 
-    /*
-    if (navigator.geolocation) { // GPS를 지원하면
-        navigator.geolocation.getCurrentPosition(pos => {
-            setLocation(pos.coords);
-            console.log(location);
-        },
-            error => {
-                console.error(error);
-            },
-            {
-                enableHighAccuracy: false,
-                maximumAge: 0,
-                timeout: Infinity
-            }
-        );
-    } else {
-        alert('위치정보 불러오기 실패');
-    }
-    //위치정보 불러오기*/
+    console.log(location.latitude);
+    console.log(location.longitude);
+    console.log(userObj);
     const onSubmit = async (event) => {
         event.preventDefault();
         let attachmentUrl = "";
@@ -61,6 +28,7 @@ const Home = ({ userObj, location }) => {
             const response = await attachmentfileRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
         }
+        
         await dbService.collection("storeinfo").add({
             attachmentUrl,
             storeName,

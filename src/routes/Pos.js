@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { dbService, storageService } from "fbase";
+import { useHistory } from "react-router-dom";
 
 const Pos = (storeObj) => {
     //const location = storeObj.location;
-
+    const history = useHistory();
     if (!localStorage.getItem("userInfo")) {
         localStorage.setItem(
             "userInfo",
             JSON.stringify({
                 location: storeObj.location,
-                history: storeObj.history
             })
         );
     }
@@ -24,7 +24,8 @@ const Pos = (storeObj) => {
         const ok = window.confirm("매장을 삭제하시겠습니까?");
         if (ok) {
             await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).delete();
-            await storageService.refFromURL(storeObj.location.state.storeObj.attachmentUrl).delete();
+            if(storeObj.location.state.storeObj.attachmentUrl!==""){
+            await storageService.refFromURL(storeObj.location.state.storeObj.attachmentUrl).delete();}
             await dbService.collection("review").where("ThisStoreId", "==", storeObj.location.state.storeObj.id)
                 .get()
                 .then(function (querySnapshot) {
@@ -55,6 +56,7 @@ const Pos = (storeObj) => {
                 });
             // 매장 고유 번호와 일치하는 리뷰, 메뉴, 테이블, 등등 다 삭제 할 것
         }
+        history.push("/");
     }
 
     return (
