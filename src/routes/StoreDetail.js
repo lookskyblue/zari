@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import MenuLoad from "./MenuLoad";
 import Menu from "./Menu";
 import { uObj } from "../components/App";
+import ShowStoreList from "./ShowStoreList";
 
 const StoreDetail = (storeObj, isNear) => {
     if (!localStorage.getItem("userInfo2")) {
@@ -17,10 +18,24 @@ const StoreDetail = (storeObj, isNear) => {
             "userInfo2",
             JSON.stringify({
                 location: storeObj.location,
+                id: storeObj.location.state.storeObj.id,
+                storeName: storeObj.location.state.storeObj.storeName,
+                storeIntro: storeObj.location.state.storeObj.storeIntro,
+                storeTime: storeObj.location.state.storeObj.storeTime
             }),
         )
     };
 
+    if (!localStorage.getItem("StoreDetail")) {
+        localStorage.setItem(
+            "StoreDetail",
+            JSON.stringify({
+                storeName: storeObj.location.state.storeObj.storeName,
+                storeIntro: storeObj.location.state.storeObj.storeIntro,
+                storeTime: storeObj.location.state.storeObj.storeTime
+            }),
+        )
+    };
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [ownerId, setOwnerId] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.id);
@@ -29,39 +44,37 @@ const StoreDetail = (storeObj, isNear) => {
     const [storeTime, setStoreTime] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeTime);
 
     const [editing, setEditing] = useState(false);
-    const [newStoreName, setNewStoreName] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeName);
-    const [newStoreIntro, setNewStoreIntro] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeIntro);
-    const [newStoreTime, setNewStoreTime] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeTime);
+  
 
     const toggleEditing = () => setEditing((prev) => !prev);
     const onSubmit = async (event) => {
         event.preventDefault();
         await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).update({
-            storeName: newStoreName,
-            storeIntro: newStoreIntro,
-            Time: newStoreTime
+            storeName: storeName,
+            storeIntro: storeIntro,
+            storeTime: storeTime
         })
+        localStorage.setItem(
+            "StoreDetail",
+            JSON.stringify({
+                storeName: storeName,
+                storeIntro: storeIntro,
+                storeTime: storeTime
+            }),
+        )
         setEditing(false);
     }
     const onChange1 = (event) => {
         const { target: { value } } = event;
-        setNewStoreName(value);
+        setStoreName(value);
     }
     const onChange2 = (event) => {
         const { target: { value } } = event;
-        setNewStoreIntro(value);
+        setStoreIntro(value);
     }
     const onChange3 = (event) => {
         const { target: { value } } = event;
-        setNewStoreTime(value);
-    }
-
-    const setting = () => {
-        setLoadLocalStorage(JSON.parse(localStorage.getItem("userInfo2")));
-        setOwnerId(loadLocalStorage.location.state.storeObj.id)
-        setStoreName(loadLocalStorage.location.state.storeObj.storeName)
-        setStoreIntro(loadLocalStorage.location.state.storeObj.storeIntro)
-        setStoreTime(loadLocalStorage.location.state.storeObj.storeTime)
+        setStoreTime(value);
     }
 
     const SpreadReview = () => {  // 토글
@@ -81,20 +94,20 @@ const StoreDetail = (storeObj, isNear) => {
     }, []);
 
     return (
-        <div>
+        <div className="storeDetail__container">
             {
                 editing ?
                     <>
-                        <form onSubmit={onSubmit}>
-                            <input type="text" placeholder="새로운 매장 이름" value={newStoreName} onChange={onChange1} required />
-                            <input type="text" placeholder="새로운 매장 설명" value={newStoreIntro} onChange={onChange2} required />
-                            <input type="text" placeholder="새로운 매장 영업 시간" value={newStoreTime} onChange={onChange3} required />
+                        <form className="storeDetail__edit" onSubmit={onSubmit}>
+                            <input type="text" placeholder="새로운 매장 이름" value={storeName} onChange={onChange1} required />
+                            <input type="text" placeholder="새로운 매장 설명" value={storeIntro} onChange={onChange2} required />
+                            <input type="text" placeholder="새로운 매장 영업 시간" value={storeTime} onChange={onChange3} required />
                             <input type="submit" value="수정" />
                         </form>
-                        <button onClick={toggleEditing}>취소</button>
+                        <button className="storeDetail__cancelBtn" onClick={toggleEditing}>취소</button>
                     </> :
                     <>
-                        {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button onClick={toggleEditing}>매장 정보 수정</button>}
+                        {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button className="storeDetail__introEdit" onClick={toggleEditing}>매장 정보 수정</button>}
                         <ul className="storeDetail">
                             <li className="storeDetail__Logo">
                                 매장 로고 : 로고 이미지
@@ -119,7 +132,7 @@ const StoreDetail = (storeObj, isNear) => {
                             <button onClick={SpreadReview} >리뷰</button>
                         </div>
                         <div>
-                            {isClicked ? <ReviewPage storeName={storeName} ownerId={ownerId} /> : ""}
+                            {isClicked ? <ReviewPage storeObj={storeObj} /> : ""}
                         </div>
                     </>
             }

@@ -7,44 +7,25 @@ import { v4 as uuidv4 } from "uuid";    // 랜덤 숫자 생성
 
 const Home = ({ userObj, location }) => {
 
-    //const [location, setLocation] = useState();
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
     const [storeTime, setStoreTime] = useState("");
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState("");
 
     const [storeCollection, setStoreCollection] = useState([]);
 
     const history = useHistory();
 
-    /*
-    if (navigator.geolocation) { // GPS를 지원하면
-        navigator.geolocation.getCurrentPosition(pos => {
-            setLocation(pos.coords);
-            console.log(location);
-        },
-            error => {
-                console.error(error);
-            },
-            {
-                enableHighAccuracy: false,
-                maximumAge: 0,
-                timeout: Infinity
-            }
-        );
-    } else {
-        alert('위치정보 불러오기 실패');
-    }
-    //위치정보 불러오기*/
     const onSubmit = async (event) => {
         event.preventDefault();
         let attachmentUrl = "";
-        if (attachment != "") {
+        if (attachment !== "") {
             const attachmentfileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
             // 매장 등록에 사용한 이미지는 Storage에 user id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
         }
+
         await dbService.collection("storeinfo").add({
             attachmentUrl,
             storeName,
@@ -52,7 +33,7 @@ const Home = ({ userObj, location }) => {
             storeIntro,
             storeOnwer: userObj.email,
             UID: userObj.uid, // 사용자 유니크 id
-            Time: storeTime,
+            storeTime,
             tableN: 0
         });
 
@@ -91,15 +72,20 @@ const Home = ({ userObj, location }) => {
     const onClearAttachment = () => setAttachment(null);
 
     return (
-        <div>
-            <form on onSubmit={onSubmit}>
-                <input type="file" accept="image/*" onChange={onFileChange} />
+        <div className="register__container">
+            <div className="register__logo">
+                <div>
+                    <div className="register__text">매장 로고를 선택하세요.</div>
+                    <input type="file" accept="image/*" onChange={onFileChange} />
+                </div>
                 {attachment && (
                     <div>
-                        <img src={attachment} />
+                        <img className="register__img" src={attachment} />
                         <button onClick={onClearAttachment}>취소</button>
                     </div>)
                 }
+            </div>
+            <form className="register__form" on onSubmit={onSubmit}>
                 <input value={storeName} onChange={onChange1} type="text" placeholder="매장 이름" maxLength={20} required />
                 <input value={storeIntro} onChange={onChange2} type="text" placeholder="매장 설명" maxLength={200} required />
                 <input value={storeTime} onChange={onChange3} type="text" placeholder="매장 영업 시간" maxLength={200} required />

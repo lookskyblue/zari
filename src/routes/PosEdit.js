@@ -10,7 +10,7 @@ class PosEdit extends React.Component {
         count: 0,
         location: ""
     };
-    
+
     componentDidMount() {
         const { location, history } = this.props;
         //로컬 스토리지에 저장해서 새로고침해도 상관없도록!
@@ -40,48 +40,13 @@ class PosEdit extends React.Component {
     };
 
     render() {
-        
-        if(localStorage.getItem("userInfo")){
-            this.props= JSON.parse(localStorage.getItem("userInfo"));
-            }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
-            const { location, history } = this.props; 
-            return (
-        <div> 
-            <ul>
-                <li>
-                    <Link to = {
-                    
-                        {
-                            pathname:"/EditTable",
-                            state: {
-                                storeObj: location.state.storeObj.id,
-                                storeName: location.state.storeObj.id
-                            }
-                        }
-                    }>
-                        <button >
-                            테이블 관리
-                        </button>
-                    </Link>
-                </li>
-                
-                <li> 
-                    가게 수정
-                </li>
-                    <li>
-                        <Link to={
-                            {
-                                pathname: "/Menu",
-                                state: {
-                                    storeObj: location.state.storeObj.id
-                                }
-                            }
-                        }>
-                            <button>가게 메뉴</button>
-                        </Link>
-                    </li>
-                </ul>
 
+        if (localStorage.getItem("userInfo")) {
+            this.props = JSON.parse(localStorage.getItem("userInfo"));
+        }//새로고침시 로컬호스트에 저장된 정보가 있다면 받아온다.
+        const { location, history } = this.props;
+        return (
+            <div>
             </div>
         );
     }

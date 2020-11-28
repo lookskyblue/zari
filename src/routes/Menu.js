@@ -31,7 +31,7 @@ const Menu = (storeObj) => {
 
     useEffect(() => {
 
-        dbService.collection("menu").onSnapshot(snapshot => {
+        dbService.collection("menu").where("StoreID", "==", storeObj.location.state.storeObj).onSnapshot(snapshot => {
             const menuArray = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
@@ -49,8 +49,9 @@ const Menu = (storeObj) => {
                     <MenuLoad key={obj.id} menus={obj} isStore={obj.StoreID === selectedStoreID} />
                 ))}
             </div>
-
-            <button onClick={SpreadMenuAdd}>메뉴 추가</button>
+            <div className="menu__addBtn">
+                <button onClick={SpreadMenuAdd}>메뉴 추가</button>
+            </div>
             <div>
                 {isClicked ? <MenuAdd storeObj={selectedStoreID} /> : ""}
             </div>
