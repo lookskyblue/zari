@@ -43,12 +43,11 @@ class MapAPI extends Component {
         <Map
           onClick={this.onMapClicked}
           google={this.props.google}
-          zoom={15}
+          zoom={17}
           initialCenter={this.props.initialCenter}
           style={mapStyles}
         >
 
-<<<<<<< HEAD
           <Marker onClick={this.onMarkerClick} name={"현재위치"} position={this.props.initialCenter}>
           </Marker>
 
@@ -61,24 +60,6 @@ class MapAPI extends Component {
                   
                 </Marker>
             ))}
-=======
-          <Marker onClick={this.onMarkerClick} name={"현재위치"} >
-            <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
-            </InfoWindow>
-          </Marker>
-
-          {storeArray !== 0 && storeArray.map((obj) => (
-            <Marker key={obj.id} name={obj.storeName} title={'근처매장'} onClick={this.onMarkerClick}
-              name={"매장"} position={{ lat: obj.location.latitude, lng: obj.location.longitude }} icon={{
-                url: "http://maps.google.com/mapfiles/ms/icons/blue.png"
-              }}>
-
-            </Marker>
-          ))}
->>>>>>> e9ec349b21ad6f693bd9d041b6b637913a2518cd
 
           {this.state.selectedPlace && (
             <InfoWindow
