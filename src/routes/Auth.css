@@ -26,7 +26,7 @@ body{
 
 .storeInfo > a {
     display: flex;
-    justify-content: center;    /* 여기서 선택버튼 */
+    justify-content: center;
     z-index: 0;
     width: 100%;
     padding: 10px;
@@ -41,6 +41,8 @@ body{
 
 .storeInfo__imgContainer {
     padding-right: 20px;
+    margin-left: 80px;
+    width: 420px;
 }
 
 .storeInfo__img {
@@ -51,8 +53,9 @@ body{
 .storeInfo__name {
     display: flex;
     align-items: center;
+    width: 660px;
+    font-size: 25px;
 }
-
 
 #root > div > div:nth-child(1) {
     margin-top:140px;
@@ -397,12 +400,30 @@ footer{
 .review__obj {
     display: flex;
     justify-content: space-between;
+    margin: 5px;
     padding: 20px 0;
     border-bottom: solid 1px lightgray;
 }
 
-.review__obj > a {
-    color: #333;
+.review__info {
+    display: flex;
+}
+
+.review__writer {
+    padding-bottom: 10px;
+    margin-right: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.review__time {
+    padding-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.review__comment {
+
 }
 
 .review__form {

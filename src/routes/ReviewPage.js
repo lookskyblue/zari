@@ -8,13 +8,15 @@ const ReviewPage = ({ storeObj }) => {
     const [attachment, setAttachment] = useState();
     const [reviewList, setReviewList] = useState([]);
     const myEmail = authService.currentUser.email;
+    const date = new Date().toLocaleString();
 
     const onSubmit = async (event) => {
         event.preventDefault();
         await dbService.collection("review").add({
             UserEmail: myEmail,
             UserComment: myComment,
-            ThisStoreId: storeObj.location.state.storeObj.id
+            ThisStoreId: storeObj.location.state.storeObj.id,
+            ReviewTime: date
         });
         setMyComment("");
     };

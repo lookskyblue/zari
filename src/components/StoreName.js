@@ -27,7 +27,7 @@ const StoreName = ({ storeObj, isOwner, isNear }) => {
                                 {storeObj.attachmentUrl && <img className="storeInfo__img" src={storeObj.attachmentUrl} />}
                             </div>
                             <h3 className="storeInfo__name">
-                                매장이름: {storeObj.storeName}
+                                {storeObj.storeName}
                             </h3>
                             {isOwner && (
                                 <>
