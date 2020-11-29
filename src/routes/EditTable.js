@@ -55,7 +55,6 @@ const EditTable = (storeObj) => {
         event.preventDefault();
         console.log(idList.length)
         console.log(idList)
-
     }
 
     const AddTable = async (event) => {
@@ -67,7 +66,8 @@ const EditTable = (storeObj) => {
         dbService.collection("Tables").add({
             UniqueStoreId: selectedStoreID,
             TotalPrice: 0,
-            OrderArray: orderArray
+            OrderArray: orderArray,
+            //TodaySales: 0
         });
 
     }
@@ -93,6 +93,7 @@ const EditTable = (storeObj) => {
             <div>
                 {tableArray.map((obj) => (
                     <div>
+                        {console.log(obj)}
                         <div>
                             <Link to={{
                                 pathname: "/AddOrder",
@@ -105,6 +106,9 @@ const EditTable = (storeObj) => {
                                 <button >테이블 고유 번호 = {obj.id}</button>
                             </Link>
                             <button onClick={DeleteTable} value={obj.id}> 테이블 삭제 </button>
+                            {
+                                obj.TotalPrice > 0 ? "만석":"빈자리"
+                            }
                         </div>
                     </div>
                 ))}

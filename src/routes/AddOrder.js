@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MenuLoad from "./MenuLoad"
 
 var tp = 0
+var todaySales = 0
 const AddOrder = (StoreObj) => {
     const selectedStoreId = StoreObj.location.state.selectedStoreID
     const TableNo = StoreObj.location.state.tableObj.id
@@ -10,13 +11,20 @@ const AddOrder = (StoreObj) => {
     const [menuList, setMenuList] = useState([]);
     const [orderList, setOrderList] = useState([]);
     const [refresh, setRefresh] = useState(0);
+    //const [todaySales, setTodaySales] = useState(0);
 
     useEffect(() => {
          dbService.collection("Tables").doc(TableNo).onSnapshot(function(doc) {
              setOrderList(doc.data().OrderArray)
              console.log("유즈팩트 토탈머니")
-             console.log(doc.data().TotalPrice)
              tp = doc.data().TotalPrice
+             //setTodaySales(doc.data().todaySales)
+             //todaySales = doc.data().TodaySales
+         })
+
+         dbService.collection("storeinfo").doc(selectedStoreId).onSnapshot(function(doc) {
+            //setTodaySales(doc.data().TodaySales)
+            todaySales=doc.data().TodaySales
          })
 
         dbService.collection("menu").where
@@ -30,9 +38,6 @@ const AddOrder = (StoreObj) => {
     }, [refresh]);
 
     const SaveOrder = () => {
-
-        console.log("SaveOrder")
-        console.log(tp)
 
         dbService.collection("Tables").doc(TableNo).set({
             TotalPrice: tp,
@@ -82,6 +87,11 @@ const AddOrder = (StoreObj) => {
     }
 
     const Calculate = () => {
+        console.log("정산 함수")
+        console.log(todaySales)
+        console.log(tp)
+        todaySales=(tp+todaySales)
+        //todaySales = todaySales + tp
 
         for(var i = 0; i < orderList.length; i++) {
                 orderList[i].orderQuantity = 0
@@ -91,8 +101,13 @@ const AddOrder = (StoreObj) => {
         
         dbService.collection("Tables").doc(TableNo).set({
             TotalPrice: tp,
-            OrderArray: orderList
+            OrderArray: orderList,
             }, {merge : true })
+
+        dbService.collection("storeinfo").doc(selectedStoreId).set({
+            TodaySales: todaySales
+            }, {merge : true })
+
             setRefresh(1)
     }
 

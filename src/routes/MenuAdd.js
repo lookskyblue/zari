@@ -113,7 +113,7 @@ const MenuAdd = ({ storeObj }) => {
                     </div>)
                 }
                 <input value={MenuName} onChange={onChange2} type="text" placeholder="메뉴 이름" maxLength={50} required />
-                <input value={MenuPrice} onChange={onChange3} type="number" placeholder="메뉴 가격" maxLength={50} required />
+                <input value={MenuPrice} onChange={onChange3} type="number" placeholder="메뉴 가격" maxLength={50}  min='0' max='1000000' required />
                 <input type="submit" value="메뉴 추가" />
             </form>
         </div>

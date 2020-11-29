@@ -66,10 +66,10 @@ const Pos = (storeObj) => {
                     매장 이름: {storeObj.location.state.storeObj.storeName}
                 </li>
                 <li className="Pos__TableCnt">
-                    테이블 수  :
+                    테이블 수  : {storeObj.location.state.storeObj.tableN}
                 </li>
                 <li className="Pos__Sales">
-                    금일 매출 :
+                    금일 매출 : {storeObj.location.state.storeObj.TodaySales}원
                 </li>
             </ul>
             <div className="Pos__Btn">

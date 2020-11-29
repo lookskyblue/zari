@@ -34,7 +34,8 @@ const Home = ({ userObj, location }) => {
             storeOnwer: userObj.email,
             UID: userObj.uid, // 사용자 유니크 id
             storeTime,
-            tableN: 0
+            tableN: 0,
+            TodaySales: 0
         });
 
         setAttachment("");
