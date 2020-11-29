@@ -13,7 +13,11 @@ const AddOrder = (StoreObj) => {
             })
         );
     }
+
+    
     StoreObj = JSON.parse(localStorage.getItem("AddOrder")).StoreObj;
+    console.log(StoreObj.location.state.tableObj.id)
+
     const selectedStoreId = StoreObj.location.state.selectedStoreID
     const TableNo = StoreObj.location.state.tableObj.id
 
