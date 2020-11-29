@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { uObj } from "./App";
 import { dbService } from "fbase"
 
@@ -13,22 +13,21 @@ const Reviews = ({ reviews, isStore }) => {
 
     return (
         <div className="review__obj">
-            <Link
-                to={{
-                    pathname: "/",
-                    state: {
-                        reviews,
-                    }
-                }}
-            >
-                {isStore && (
-                    <h3>
-                        {reviews.UserEmail}
-                        <br></br>
+            {isStore && (
+                <div>
+                    <div className="review__info">
+                        <div className="review__writer">
+                            {reviews.UserEmail}
+                        </div>
+                        <div className="review__time">
+                            {reviews.ReviewTime}
+                        </div>
+                    </div>
+                    <div className="review__comment">
                         {reviews.UserComment}
-                    </h3>
-                )}
-            </Link>
+                    </div>
+                </div>
+            )}
             {isStore && uObj.email === reviews.UserEmail && (
                 <button onClick={onDeleteClick}>삭제</button>
             )}

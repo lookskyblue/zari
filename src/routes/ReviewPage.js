@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fbase"
 import Reviews from "components/Reviews"
 
-
 const ReviewPage = ({ storeObj }) => {
     const [myComment, setMyComment] = useState("");
     const [attachment, setAttachment] = useState();
     const [reviewList, setReviewList] = useState([]);
     const myEmail = authService.currentUser.email;
+    const date = new Date().toLocaleString();
 
     const onSubmit = async (event) => {
         event.preventDefault();
         await dbService.collection("review").add({
             UserEmail: myEmail,
             UserComment: myComment,
-            ThisStoreId: storeObj.location.state.storeObj.id
+            ThisStoreId: storeObj.location.state.storeObj.id,
+            ReviewTime: date
         });
         setMyComment("");
     };
@@ -63,7 +64,7 @@ const ReviewPage = ({ storeObj }) => {
                         </div>)
                     }
                     <input value={myComment} onChange={onChange} type="text" placeholder="리뷰를 남겨보세요." maxLength={50} />
-                    <input type="submit" value="댓글 달기" />
+                    <input type="submit" value="리뷰 남기기" />
                 </form>
                 {reviewList.map((obj) => (
                     <Reviews key={obj.id} reviews={obj} isStore={obj.ThisStoreId === storeObj.location.state.storeObj.id} />

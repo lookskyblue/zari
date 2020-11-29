@@ -26,7 +26,7 @@ body{
 
 .storeInfo > a {
     display: flex;
-    justify-content: center;    /* 여기서 선택버튼 */
+    justify-content: center;
     z-index: 0;
     width: 100%;
     padding: 10px;
@@ -41,6 +41,8 @@ body{
 
 .storeInfo__imgContainer {
     padding-right: 20px;
+    margin-left: 80px;
+    width: 420px;
 }
 
 .storeInfo__img {
@@ -51,11 +53,8 @@ body{
 .storeInfo__name {
     display: flex;
     align-items: center;
-}
-
-
-#root > div > div:nth-child(1) {
-    margin-top:140px;
+    width: 660px;
+    font-size: 25px;
 }
 
 #root>div{
@@ -221,7 +220,6 @@ footer{
 .storeDetail__edit {
     display: flex;
     justify-content: center;
-    margin: 140px 0 0 0;
 }
 
 .storeDetail__introEdit {
@@ -397,12 +395,26 @@ footer{
 .review__obj {
     display: flex;
     justify-content: space-between;
+    margin: 5px;
     padding: 20px 0;
     border-bottom: solid 1px lightgray;
 }
 
-.review__obj > a {
-    color: #333;
+.review__info {
+    display: flex;
+}
+
+.review__writer {
+    padding-bottom: 10px;
+    margin-right: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.review__time {
+    padding-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .review__form {
@@ -455,4 +467,38 @@ footer{
     background-color:#ffddc1;
     cursor:pointer;
     box-shadow:0 0 4px #c97b63;
+}
+
+.pf {
+    display: flex;
+}
+
+.logout {
+    border:none;
+    width: 80px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: #ffccbc;
+}
+
+.logout:focus{
+    outline:0;
+}
+
+.logout:hover{
+    background-color:#ffddc1;
+    cursor:pointer;
+    box-shadow:0 0 4px #c97b63;
+}
+
+.profile__container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.profile__myStoreList {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0 0 20px 100px;
 }

@@ -12,6 +12,7 @@ import PosEdit from "../routes/PosEdit"
 import Menu from "../routes/Menu"
 import EditTable from "../routes/EditTable";
 import AddOrder from "../routes/AddOrder";
+import ReviewPage from "routes/ReviewPage";
 
 const AppRouter = ({ isLoggedIn, userObj, location }) => {
   return (
@@ -26,9 +27,7 @@ const AppRouter = ({ isLoggedIn, userObj, location }) => {
               <ShowStoreList userObj={userObj} location={location} />
             </Route>
 
-            <Route exact path="/Profile">
-              <Profile />
-            </Route>
+            <Route exact path="/Profile" component={Profile} />
 
             <Route exact path="/Home">
               <Home userObj={userObj} location={location} />
