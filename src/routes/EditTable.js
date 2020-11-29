@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const EditTable = (storeObj) => {
 
     const [orderArray, setOrderArray] = useState([])
+    const [tableNumber, setTableNumber] = useState("0");
 
     if (!localStorage.getItem("EditTable")) {
         localStorage.setItem(
@@ -17,32 +18,29 @@ const EditTable = (storeObj) => {
         );
     }
     const [tableArray, setTableArray] = useState([]);
-    const [selectedStoreID,setselectedStoreI] = useState(JSON.parse(localStorage.getItem("EditTable")).location.state.storeObj);
+    const [selectedStoreID, setselectedStoreI] = useState(JSON.parse(localStorage.getItem("EditTable")).location.state.storeObj);
     const [idList, setIdList] = useState([]); // Tables 컬렉션의 모든 문서 값들
 
     useEffect(() => {
 
         dbService.collection("menu").where
-        ("StoreID", "==", selectedStoreID).onSnapshot(snapshot => {
-            const orderArray = snapshot.docs.map(doc => {
-                return(
-                    {
-                        menuName: doc.data().Name,
-                        orderQuantity: 0,
-                        singlePrice: (doc.data().Price*1), // 문자->숫자 형변환
-                        totalPrice: 0 // orderQuantity * singlePrice
-                    }
-                );
+            ("StoreID", "==", selectedStoreID).onSnapshot(snapshot => {
+                const orderArray = snapshot.docs.map(doc => {
+                    return (
+                        {
+                            menuName: doc.data().Name,
+                            orderQuantity: 0,
+                            singlePrice: (doc.data().Price * 1), // 문자->숫자 형변환
+                            totalPrice: 0 // orderQuantity * singlePrice
+                        }
+                    );
+                })
+                setOrderArray(orderArray)
             })
-            console.log("테이블 애드 함수")
-            console.log(orderArray)
-            setOrderArray(orderArray)
-        })
 
         dbService.collection("Tables").where
             ("UniqueStoreId", "==", selectedStoreID).onSnapshot(snapshot => {
                 const tableArray = snapshot.docs.map(doc => ({// Tables값 전체 가져오기
-
                     id: doc.id,
                     ...doc.data(),
                 }));
@@ -51,25 +49,14 @@ const EditTable = (storeObj) => {
             });
     }, []);
 
-    const checkLength = (event) => {
-        event.preventDefault();
-        console.log(idList.length)
-        console.log(idList)
-    }
-
     const AddTable = async (event) => {
         event.preventDefault();
-
-        console.log("메뉴 객체배열 나와야함..")
-        console.log(orderArray)
-
         dbService.collection("Tables").add({
             UniqueStoreId: selectedStoreID,
             TotalPrice: 0,
             OrderArray: orderArray,
-            //TodaySales: 0
+            TableNo: tableNumber
         });
-
     }
 
     const DeleteTable = async (event) => {
@@ -81,37 +68,46 @@ const EditTable = (storeObj) => {
         }
     }
 
-    return (
-        <div>
-            <div>
-                <button onClick={checkLength}>idList 길이 확인</button>
-            </div>
-            <div>
-                <button onClick={AddTable}>테이블 추가</button>
-            </div>
+    const onChange = (event) => {
+        const { target: { value } } = event;
+        setTableNumber(value);
+    }
 
-            <div>
+    return (
+        <div className="table">
+            <div className="table__container">
                 {tableArray.map((obj) => (
-                    <div>
-                        {console.log(obj)}
-                        <div>
-                            <Link to={{
-                                pathname: "/AddOrder",
-                                state: {
-                                    selectedStoreID,
-                                    tableObj: obj
-                                }
+                    <div className="table__obj">
+                        <Link to={{
+                            pathname: "/AddOrder",
+                            state: {
+                                selectedStoreID,
+                                tableObj: obj
                             }
-                            }>
-                                <button >테이블 고유 번호 = {obj.id}</button>
-                            </Link>
-                            <button onClick={DeleteTable} value={obj.id}> 테이블 삭제 </button>
+                        }
+                        }>
+                            <button className="table__objBtn">테이블 고유 번호 = {obj.TableNo}</button>
+                        </Link>
+                        <div className="table__delBtn__container">
+                            <button className="table__delBtn" onClick={DeleteTable} value={obj.id}> 삭제 </button>
                             {
-                                obj.TotalPrice > 0 ? "만석":"빈자리"
+                                obj.TotalPrice > 0 ?
+                                    <div className="O">
+                                        O
+                            </div> :
+                                    <div className="X">
+                                        X
+                            </div>
                             }
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="table__addBtn">
+                <form>
+                    <input type="number" placeholder="테이블 번호" onChange={onChange} min='1' />
+                    <button onClick={AddTable}>테이블 추가</button>
+                </form>
             </div>
         </div>
     )

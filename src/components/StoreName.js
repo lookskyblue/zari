@@ -26,8 +26,6 @@ const StoreName = ({ storeObj, isOwner, isNear }) => {
 
    }, []);
 
-   console.log(tableArray)
-
    const HowManyPeople = () => {
         var TableOn = 0
         var i

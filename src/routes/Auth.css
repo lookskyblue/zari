@@ -502,3 +502,67 @@ footer{
     font-weight: bold;
     padding: 0 0 20px 100px;
 }
+
+.table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table__container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.table__obj {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    padding: 0 30px;
+}
+
+.table__objBtn {
+    width: 150px;
+    height: 150px;
+}
+
+.table__addBtn {
+    margin-top: 100px;
+    margin-right: 80px;
+}
+
+.table__addBtn > form {
+    width: 100px;
+}
+
+.table__delBtn__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.table__delBtn {
+    width: 40px;
+    height:20px;
+}
+
+.O {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #C71585;
+    margin-top: 90px;
+}
+
+.X {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    margin-top: 90px;
+}

@@ -16,7 +16,6 @@ const AddOrder = (StoreObj) => {
     useEffect(() => {
          dbService.collection("Tables").doc(TableNo).onSnapshot(function(doc) {
              setOrderList(doc.data().OrderArray)
-             console.log("유즈팩트 토탈머니")
              tp = doc.data().TotalPrice
              //setTodaySales(doc.data().todaySales)
              //todaySales = doc.data().TodaySales
@@ -38,7 +37,6 @@ const AddOrder = (StoreObj) => {
     }, [refresh]);
 
     const SaveOrder = () => {
-
         dbService.collection("Tables").doc(TableNo).set({
             TotalPrice: tp,
             OrderArray: orderList
@@ -87,12 +85,8 @@ const AddOrder = (StoreObj) => {
     }
 
     const Calculate = () => {
-        console.log("정산 함수")
-        console.log(todaySales)
-        console.log(tp)
         todaySales=(tp+todaySales)
-        //todaySales = todaySales + tp
-
+        
         for(var i = 0; i < orderList.length; i++) {
                 orderList[i].orderQuantity = 0
                 orderList[i].totalPrice = 0
