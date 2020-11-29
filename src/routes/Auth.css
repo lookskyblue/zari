@@ -535,6 +535,24 @@ footer{
     width: 100px;
 }
 
+.table__addBtn button {
+    border:none;
+    width: 100px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: #ffccbc;
+}
+
+.table__addBtn button:focus{
+    outline:0;
+}
+
+.table__addBtn button:hover{
+    background-color:#ffddc1;
+    cursor:pointer;
+    box-shadow:0 0 4px #c97b63;
+}
+
 .table__delBtn__container {
     display: flex;
     flex-direction: column;
