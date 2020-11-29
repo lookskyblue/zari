@@ -6,7 +6,6 @@ const MenuLoad = ({ menus, isStore }) => {
 
     const [tableArray, setTableArray] = useState([]);
     const storeId = menus.StoreID // 가게 고유 번호
-    console.log(storeId)
 
     useEffect(() => {
         dbService.collection("Tables")
@@ -18,8 +17,6 @@ const MenuLoad = ({ menus, isStore }) => {
             setTableArray(tableArray);
         });
     }, []);
-
-    console.log(tableArray)
 
     const onDeleteClick = async () => { // 메뉴 삭제
         const ok = window.confirm("메뉴를 삭제하시겠습니까? \n테이블에 해당 메뉴의 주문내역도 같이 삭제됩니다.");

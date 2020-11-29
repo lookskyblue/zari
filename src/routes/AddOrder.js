@@ -21,7 +21,6 @@ const AddOrder = (StoreObj) => {
     const [orderList, setOrderList] = useState([]);
     const [refresh, setRefresh] = useState(0);
     //const [todaySales, setTodaySales] = useState(0);
-    console.log(TableNo);
 
     useEffect(() => {
         dbService.collection("Tables").doc(TableNo).onSnapshot(function (doc) {
@@ -116,19 +115,17 @@ const AddOrder = (StoreObj) => {
         for (var i = 0; i < orderList.length; i++) {
             if (orderList[i].menuName == menuName) {
                 return (
-                    <div>
-                        <ul>
-                            <li>
-                                주문 수량: {orderList[i].orderQuantity}
-                            </li>
-                            <li>
-                                현재 메뉴 가격: {orderList[i].totalPrice}
-                            </li>
-                            <li>
-                                현제 테이블 총 주문 금액: {tp}
-                            </li>
-                        </ul>
-                    </div>
+                    <ul className="order__info">
+                        <li>
+                            주문 수량: {orderList[i].orderQuantity} 개
+                        </li>
+                        <li>
+                            현재 메뉴 가격: {orderList[i].totalPrice} 원
+                        </li>
+                        <li>
+                            현재 테이블 총 주문 금액: {tp} 원
+                        </li>
+                    </ul>
                 )
             }
         }
@@ -136,11 +133,13 @@ const AddOrder = (StoreObj) => {
 
     return (
         <div>
-            <div>
-                현재 테이블 총 주문 금액: {tp}
-            </div>
-            <div>
-                <button onClick={Calculate}>계산하기</button>
+            <div className="order__container">
+                <div className="order__totalPrice">
+                    현재 테이블 총 주문 금액: {tp} 원
+                </div>
+                <div className="order__calc">
+                    <button onClick={Calculate}>계산하기</button>
+                </div>
             </div>
             <div>
                 {menuList.map((obj) => (    //obj 는 menu 컬렉션의 하나하나의 문서들
@@ -157,13 +156,11 @@ const AddOrder = (StoreObj) => {
                                     <h3>
                                         메뉴 가격: {obj.Price} 원
                                     </h3>
-                                    <div>
+                                    <div className="btn">
                                         <button onClick={AddOrder} value={obj.Name}>+1</button>
                                         <button onClick={MinusOrder} value={obj.Name}>-1</button>
-                                        {
-                                            ShowOrderInfo(obj.Name)
-                                        }
                                     </div>
+                                    {ShowOrderInfo(obj.Name)}
                                 </div>
                             </div>
                         }

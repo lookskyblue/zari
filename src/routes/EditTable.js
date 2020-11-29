@@ -88,7 +88,7 @@ const EditTable = (storeObj) => {
                             }
                         }
                         }>
-                            <button className="table__objBtn">테이블 고유 번호 = {obj.TableNo}</button>
+                            <button className="table__objBtn">테이블 번호 = {obj.TableNo}</button>
                         </Link>
                         <div className="table__delBtn__container">
                             <button className="table__delBtn" onClick={DeleteTable} value={obj.id}> 삭제 </button>

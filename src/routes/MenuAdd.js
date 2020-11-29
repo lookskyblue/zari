@@ -29,8 +29,6 @@ const MenuAdd = ({ storeObj }) => {
         })
     }, []);
 
-    console.log(tableArray)
-
     const onSubmit = async (event) => {
 
         for(var i = 0; i < menuArray.length; i++) {
