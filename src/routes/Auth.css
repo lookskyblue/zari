@@ -511,7 +511,7 @@ footer{
 .table__container {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 20px;
+    padding: 30px 20px 0 20px;
 }
 
 .table__obj {
