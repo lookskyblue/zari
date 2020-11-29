@@ -89,8 +89,28 @@ form > input {
 }
 
 .option button {
-    margin: 50px 5px;
-    padding: 5px 0;
+    margin: 50px 0px;
+    padding: 5px 10px;
+    border:none;
+    background-color: #F8F8FF;
+    color: #333;
+    font-size: 14px;
+    border-right: solid 2px lightgray;
+}
+
+.option button:hover {
+    cursor: pointer;
+}
+
+.option button:focus {
+    outline:0;
+}
+
+.option > a {
+    font-size: 14px;
+    color: #333;
+    margin: 50px 0;
+    padding: 5px 10px;
 }
 
 .ZARI {
