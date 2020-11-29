@@ -17,6 +17,7 @@ const StoreDetail = (storeObj, isNear) => {
         localStorage.setItem(
             "userInfo2",
             JSON.stringify({
+                storeObj: storeObj,
                 location: storeObj.location,
                 id: storeObj.location.state.storeObj.id,
                 storeName: storeObj.location.state.storeObj.storeName,
@@ -36,12 +37,14 @@ const StoreDetail = (storeObj, isNear) => {
             }),
         )
     };
+
+    storeObj=JSON.parse(localStorage.getItem("userInfo2")).storeObj;
     const [loadLocalStorage, setLoadLocalStorage] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [ownerId, setOwnerId] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.id);
-    const [storeName, setStoreName] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeName);
-    const [storeIntro, setStoreIntro] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeIntro);
-    const [storeTime, setStoreTime] = useState(JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.storeTime);
+    const [storeName, setStoreName] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeName);
+    const [storeIntro, setStoreIntro] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeIntro);
+    const [storeTime, setStoreTime] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeTime);
 
     const [editing, setEditing] = useState(false);
   
@@ -62,6 +65,7 @@ const StoreDetail = (storeObj, isNear) => {
                 storeTime: storeTime
             }),
         )
+        
         setEditing(false);
     }
     const onChange1 = (event) => {
@@ -132,7 +136,7 @@ const StoreDetail = (storeObj, isNear) => {
                             <button onClick={SpreadReview} >리뷰</button>
                         </div>
                         <div>
-                            {isClicked ? <ReviewPage storeObj={storeObj} /> : ""}
+                            {isClicked ? <ReviewPage storeObj={JSON.parse(localStorage.getItem("userInfo2")).storeObj} /> : ""}
                         </div>
                     </>
             }

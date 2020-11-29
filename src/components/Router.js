@@ -13,6 +13,7 @@ import Menu from "../routes/Menu"
 import EditTable from "../routes/EditTable";
 import AddOrder from "../routes/AddOrder";
 import ReviewPage from "routes/ReviewPage";
+import ForgotPassword from "../routes/ForgotPassword"
 
 const AppRouter = ({ isLoggedIn, userObj, location }) => {
   return (
@@ -50,7 +51,7 @@ const AppRouter = ({ isLoggedIn, userObj, location }) => {
               <Auth />
             </Route>
           )}
-
+          <Route path="/forgot-password" component={ForgotPassword}/>
       </Switch>
 
     </Router>

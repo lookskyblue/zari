@@ -13,10 +13,12 @@ const EditTable = (storeObj) => {
             "EditTable",
             JSON.stringify({
                 location: storeObj.location,
-                history: storeObj.history
+                history: storeObj.history,
+                storeObj
             })
         );
     }
+    storeObj=JSON.parse(localStorage.getItem("EditTable")).storeObj;
     const [tableArray, setTableArray] = useState([]);
     const [selectedStoreID, setselectedStoreI] = useState(JSON.parse(localStorage.getItem("EditTable")).location.state.storeObj);
     const [idList, setIdList] = useState([]); // Tables 컬렉션의 모든 문서 값들

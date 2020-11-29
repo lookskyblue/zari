@@ -2,6 +2,8 @@ import { authService } from "fbase";
 import React, { useState } from "react";
 import "./Auth.css";
 import logo from "../imgs/logo.png";
+import { Link } from "react-router-dom";
+
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +41,9 @@ const Auth = () => {
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
+  
+
+
   return (
     <div className="loginForm">
       <img src={logo} className="ZARI" />
@@ -65,8 +70,7 @@ const Auth = () => {
       </form>
       <div className="option">
         <button onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</button>
-        <button onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</button>
-        <button onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</button>
+        <Link to="/forgot-password">Forgot Password?</Link>
       </div>
     </div>
   );
