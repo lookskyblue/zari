@@ -5,6 +5,15 @@ import MenuLoad from "./MenuLoad"
 var tp = 0
 var todaySales = 0
 const AddOrder = (StoreObj) => {
+    if (!localStorage.getItem("AddOrder")) {
+        localStorage.setItem(
+            "AddOrder",
+            JSON.stringify({
+                StoreObj
+            })
+        );
+    }
+    StoreObj=JSON.parse(localStorage.getItem("AddOrder")).StoreObj;
     const selectedStoreId = StoreObj.location.state.selectedStoreID
     const TableNo = StoreObj.location.state.tableObj.id
 

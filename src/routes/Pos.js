@@ -59,6 +59,17 @@ const Pos = (storeObj) => {
         history.push("/");
     }
 
+    const onDeleteTodaySales = async () => { // 매출 정산
+        const ok = window.confirm("금일 매출을 초기화 하시겠습니까?");
+        if (ok) {
+            dbService.collection("storeinfo").doc(storeObj.location.state.storeObj.id).set({
+                TodaySales: 0
+                }, {merge : true })
+        }
+        history.push("/");
+        window.confirm("초기화 되었습니다.");
+    }
+
     return (
         <div>
             <ul className="Pos">
@@ -84,7 +95,7 @@ const Pos = (storeObj) => {
                     <button className="tableManage">테이블 관리</button>
                 </Link>
                 <button className="storeDelete" onClick={onDeleteClick}>매장 삭제</button>
-                <button className="settleMoney">매출 정산</button>
+                <button className="settleMoney" onClick={onDeleteTodaySales} >매출 정산</button>
                 <Link to={
                     {
                         pathname: "/Menu",
