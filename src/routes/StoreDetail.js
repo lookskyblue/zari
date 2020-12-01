@@ -22,7 +22,8 @@ const StoreDetail = (storeObj, isNear) => {
                 id: storeObj.location.state.storeObj.id,
                 storeName: storeObj.location.state.storeObj.storeName,
                 storeIntro: storeObj.location.state.storeObj.storeIntro,
-                storeTime: storeObj.location.state.storeObj.storeTime
+                storeTime: storeObj.location.state.storeObj.storeTime,
+                attachmentUrl: storeObj.location.state.storeObj.attachmentUrl
             }),
         )
     };
@@ -33,7 +34,8 @@ const StoreDetail = (storeObj, isNear) => {
             JSON.stringify({
                 storeName: storeObj.location.state.storeObj.storeName,
                 storeIntro: storeObj.location.state.storeObj.storeIntro,
-                storeTime: storeObj.location.state.storeObj.storeTime
+                storeTime: storeObj.location.state.storeObj.storeTime,
+                attachmentUrl: storeObj.location.state.storeObj.attachmentUrl
             }),
         )
     };
@@ -45,8 +47,10 @@ const StoreDetail = (storeObj, isNear) => {
     const [storeName, setStoreName] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeName);
     const [storeIntro, setStoreIntro] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeIntro);
     const [storeTime, setStoreTime] = useState(JSON.parse(localStorage.getItem("StoreDetail")).storeTime);
+    const [attachmentUrl, setAttachmentUrl] = useState(JSON.parse(localStorage.getItem("StoreDetail")).attachmentUrl);
 
     const [editing, setEditing] = useState(false);
+    console.log(attachmentUrl);
   
 
     const toggleEditing = () => setEditing((prev) => !prev);
@@ -55,14 +59,16 @@ const StoreDetail = (storeObj, isNear) => {
         await dbService.doc(`storeinfo/${storeObj.location.state.storeObj.id}`).update({
             storeName: storeName,
             storeIntro: storeIntro,
-            storeTime: storeTime
+            storeTime: storeTime,
+            attachmentUrl: attachmentUrl
         })
         localStorage.setItem(
             "StoreDetail",
             JSON.stringify({
                 storeName: storeName,
                 storeIntro: storeIntro,
-                storeTime: storeTime
+                storeTime: storeTime,
+                attachmentUrl: attachmentUrl
             }),
         )
         
@@ -114,7 +120,7 @@ const StoreDetail = (storeObj, isNear) => {
                         {uObj.uid === JSON.parse(localStorage.getItem("userInfo2")).location.state.storeObj.UID && <button className="storeDetail__introEdit" onClick={toggleEditing}>매장 정보 수정</button>}
                         <ul className="storeDetail">
                             <li className="storeDetail__Logo">
-                                매장 로고 : 로고 이미지
+                                <img src={attachmentUrl}/>
                             </li>
                             <li className="storeDetail__Name">
                                 {storeName}

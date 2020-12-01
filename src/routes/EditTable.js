@@ -4,9 +4,10 @@ import AddOrder from "./AddOrder";
 import { Link } from "react-router-dom";
 
 const EditTable = (storeObj) => {
-
     const [orderArray, setOrderArray] = useState([])
     const [tableNumber, setTableNumber] = useState("0");
+
+    localStorage.removeItem("AddOrder");
 
     if (!localStorage.getItem("EditTable")) {
         localStorage.setItem(
