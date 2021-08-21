@@ -51,9 +51,14 @@ const ShowStoreList = ({ userObj, location }) => {
         }
     });
 
+    const initialLocation = {
+        lat: location.latitude,
+        lng: location.longitude
+    }
+
     return (
         <div>
-            <MapAPI initialCenter={{ lat: location.latitude, lng: location.longitude }} storeList={nearStoreList} />
+            <MapAPI initialCenter={initialLocation} storeList={nearStoreList} />
             {nearStoreList.map((obj) => (
                 <StoreName key={obj.id} storeObj={obj} isOwner={obj.storeOnwer === userObj.email} />
             ))}

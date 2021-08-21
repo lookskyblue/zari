@@ -18,8 +18,6 @@ import ForgotPassword from "../routes/ForgotPassword"
 const AppRouter = ({ isLoggedIn, userObj, location }) => {
   return (
     <Router>
-      {isLoggedIn}
-
       <Switch>
         {isLoggedIn ? (
           <>
