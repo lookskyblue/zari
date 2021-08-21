@@ -4,6 +4,7 @@ import { authService } from "fbase";
 import StoreName from "components/StoreName";
 import userEvent from "@testing-library/user-event";
 import MapAPI from "../components/googlemap"
+import { useSelector } from "react-redux";//유저 정보 가져오기 위해
 
 function distance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
@@ -27,10 +28,43 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     }
 }
 
-const ShowStoreList = ({ userObj, location }) => {
+const ShowStoreList = ({ userObj }) => {
     const [storeList, setStoreList] = useState([]);
     const nearStoreList = [];
-    useEffect(() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
+    const [location, setLocation] = useState({});
+
+    const getLocation = () => {
+        if (navigator.geolocation) { // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(pos => {
+              setLocation(pos.coords);
+            },
+              error => {
+                console.error(error);
+              },
+              {
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity
+              }
+            );
+          } else {
+            alert('위치정보 불러오기 실패');
+          }
+    }
+
+    useEffect( async() => { //컴포넌트가 마운트 되면 매장 정보를 가져 오겠다 2ㄱ
+        await getLocation();
+        
+          if (location !== undefined) {
+            localStorage.setItem(
+              "userLocation",
+              JSON.stringify({
+                latitude: location.latitude,
+                longitude: location.longitude
+              })
+            );
+          }
+
         dbService.collection("storeinfo").onSnapshot(snapshot => {
             const storeArray = snapshot.docs.map(doc => ({
                 id: doc.id,
@@ -38,19 +72,23 @@ const ShowStoreList = ({ userObj, location }) => {
             }));
             setStoreList(storeArray);
         });
+
+        storeList.forEach((obj) => {
+            if (distance(location.latitude, location.longitude, obj.location.latitude, obj.location.longitude, 'K') < 5) {
+                nearStoreList.push(obj);
+            }
+        });
     }, []);
+
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userInfo2");
     localStorage.removeItem("storeMenu");
     localStorage.removeItem("StoreDetail");
     localStorage.removeItem("EditTable");
     localStorage.removeItem("AddOrder");
-    storeList.map((obj) => {
-        if (distance(location.latitude, location.longitude, obj.location.latitude, obj.location.longitude, 'K') < 5) {
-            nearStoreList.push(obj);
-        }
-    });
 
+    console.log(location);
+    useSelector(state => console.log(state))
     return (
         <div>
             <MapAPI initialCenter={{ lat: location.latitude, lng: location.longitude }} storeList={nearStoreList} />
@@ -60,5 +98,6 @@ const ShowStoreList = ({ userObj, location }) => {
         </div>
     );//여기서 css수정
 };
+
 
 export default ShowStoreList;

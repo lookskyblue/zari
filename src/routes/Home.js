@@ -4,9 +4,12 @@ import firebase from "firebase/app";
 import ShowStoreList from "./ShowStoreList";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";    // 랜덤 숫자 생성
+import { useSelector } from "react-redux";//유저 정보 가져오기 위해
 
-const Home = ({ userObj, location }) => {
+const Home = () => {
 
+    const user = useSelector(state => state.user);//state에서 user를 가져온다.(user에 대한 모든정보.)
+    const [location, setLocation] = useState({});
     const [storeName, setStoreName] = useState("");
     const [storeIntro, setStoreIntro] = useState("");
     const [storeTime, setStoreTime] = useState("");
@@ -16,11 +19,45 @@ const Home = ({ userObj, location }) => {
 
     const history = useHistory();
 
+    console.log(user);
+    const getLocation = () => {
+        if (navigator.geolocation) { // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(pos => {
+              setLocation(pos.coords);
+            },
+              error => {
+                console.error(error);
+              },
+              {
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity
+              }
+            );
+          } else {
+            alert('위치정보 불러오기 실패');
+          }
+    }
+
+    useEffect(async()=>{
+        await getLocation();
+        
+          if (location !== undefined) {
+            localStorage.setItem(
+              "userLocation",
+              JSON.stringify({
+                latitude: location.latitude,
+                longitude: location.longitude
+              })
+            );
+          }
+    },[])
+
     const onSubmit = async (event) => {
         event.preventDefault();
         let attachmentUrl = "";
         if (attachment !== "") {
-            const attachmentfileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+            const attachmentfileRef = storageService.ref().child(`${user.data.uid}/${uuidv4()}`);
             // 매장 등록에 사용한 이미지는 Storage에 user id 이름의 폴더에 랜덤 이름으로 저장됨.
             const response = await attachmentfileRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
@@ -31,8 +68,8 @@ const Home = ({ userObj, location }) => {
             storeName,
             location: new firebase.firestore.GeoPoint(location.latitude, location.longitude), //위치
             storeIntro,
-            storeOnwer: userObj.email,
-            UID: userObj.uid, // 사용자 유니크 id
+            storeOnwer: user.data.email,
+            UID: user.data.uid, // 사용자 유니크 id
             storeTime,
             tableN: 0,
             TodaySales: 0

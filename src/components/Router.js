@@ -25,13 +25,13 @@ const AppRouter = ({ isLoggedIn, userObj, location }) => {
           <>
             <Navigation />
             <Route exact path="/">
-              <ShowStoreList userObj={userObj} location={location} />
+              <ShowStoreList userObj={userObj}  />
             </Route>
 
             <Route exact path="/Profile" component={Profile} />
 
             <Route exact path="/Home">
-              <Home userObj={userObj} location={location} />
+              <Home />
             </Route>
 
             <Route exact path="/storeDetail" component={StoreDetail} />
