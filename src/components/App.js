@@ -6,7 +6,8 @@ import { Router } from "react-router-dom";
 var uObj;
 
 function App() {
-  const [init, setInit] = useState(false);
+  const [initLocation, setInitLocation] = useState(false);
+  const [initUser, setInitUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [location, setLocation] = useState(null);
@@ -16,7 +17,7 @@ function App() {
     if (navigator.geolocation) { // GPS를 지원하면
         navigator.geolocation.getCurrentPosition(pos => {
         setLocation(pos.coords);
-        setInit(true);//위치를 받아온다음에 초기화 완료뜨게함.
+        setInitLocation(true);//위치를 받아온다음에 초기화 완료뜨게함.
 
         localStorage.setItem(
           "userLocation",
@@ -49,6 +50,7 @@ function App() {
       } else {
         setIsLoggedIn(false);
       }
+      setInitUser(true);
     });
   }, []);
 
@@ -56,7 +58,7 @@ function App() {
   
   return (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} location={location} /> : "Initializing..."}
+      {initLocation&&initUser ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} location={location} /> : "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} ZARI</footer>
     </>
   );
