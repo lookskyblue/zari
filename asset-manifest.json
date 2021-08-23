@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/zari/static/css/main.b9ea6ce9.chunk.css",
-    "main.js": "/zari/static/js/main.46c9f0c9.chunk.js",
-    "main.js.map": "/zari/static/js/main.46c9f0c9.chunk.js.map",
+    "main.css": "/zari/static/css/main.ee09ded7.chunk.css",
+    "main.js": "/zari/static/js/main.2db96d23.chunk.js",
+    "main.js.map": "/zari/static/js/main.2db96d23.chunk.js.map",
     "runtime-main.js": "/zari/static/js/runtime-main.2ff2c468.js",
     "runtime-main.js.map": "/zari/static/js/runtime-main.2ff2c468.js.map",
-    "static/js/2.02aab067.chunk.js": "/zari/static/js/2.02aab067.chunk.js",
-    "static/js/2.02aab067.chunk.js.map": "/zari/static/js/2.02aab067.chunk.js.map",
+    "static/js/2.a71de34d.chunk.js": "/zari/static/js/2.a71de34d.chunk.js",
+    "static/js/2.a71de34d.chunk.js.map": "/zari/static/js/2.a71de34d.chunk.js.map",
     "index.html": "/zari/index.html",
-    "static/css/main.b9ea6ce9.chunk.css.map": "/zari/static/css/main.b9ea6ce9.chunk.css.map",
-    "static/js/2.02aab067.chunk.js.LICENSE.txt": "/zari/static/js/2.02aab067.chunk.js.LICENSE.txt"
+    "static/css/main.ee09ded7.chunk.css.map": "/zari/static/css/main.ee09ded7.chunk.css.map",
+    "static/js/2.a71de34d.chunk.js.LICENSE.txt": "/zari/static/js/2.a71de34d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2ff2c468.js",
-    "static/js/2.02aab067.chunk.js",
-    "static/css/main.b9ea6ce9.chunk.css",
-    "static/js/main.46c9f0c9.chunk.js"
+    "static/js/2.a71de34d.chunk.js",
+    "static/css/main.ee09ded7.chunk.css",
+    "static/js/main.2db96d23.chunk.js"
   ]
 }
